@@ -1,19 +1,26 @@
-/* LOGIN PLANTILLA 3 */
-/* titulo iniciar sesion usuario */
-.subtitle{
-    text-align:right;
-    margin-top: 40px;
-    margin-right: 300px;
+/*NAVBAR logo enjoy safe*/
+.navbar{
+    background:rgba(39, 82, 110, 0.884);
+    border-radius: 2px;
+}
+/*Logo enjoy safe del navbar*/
+.logoNav{
+    font-family:'Times New Roman', Times, serif;
+    font-size:25px !important;
+}
+/* LOGIN VISTA 2 */
+/*caja Login completa*/
+.boxLogin{  
+    margin-left:auto;  
+    margin-right:auto;  
+    margin-top: 20px;
 }
 /* formulario sesion inicio */
 .FormInicioSesion{
     width: 650px;
     height:350px;
-    margin-top: 30px;
-    margin-right: 60px;
     border: 2px solid gray;
-    border-radius: 10px;
-    float: right;
+    border-radius: 80px 20px;
 }
 /* contenido formulario */
 .form-group{
@@ -27,38 +34,50 @@
     margin-right: 70px;
     margin-top: 20px;
 }
-/* boton Cancelar volver a home */
+/* boton volver home de caja login*/
 .botonCancelar{
     float: left;
-    margin-left: 350px;
+    margin-left: 300px;
     margin-top: 20px;
 }
-/* FORMULARIO CHECK IN NUEVO USUARIO */
-/* fomulario check in */
-.FormCheckIn{
-    width: 800px;
-    height:800px;
-    margin-top: 30px;
-    align-content: center;
-    border: 2px solid gray;
-    border-radius: 10px;
-}
-/* boton crear usuario */
-.botonCheckIn{
-    float: right;
-    margin-top: 20px;
-    margin-right:130px;
-}
-/* boton volver al home */
+/* boton salir componente card */
 .botonCancelar2{
     float: left;
     margin-top: 20px;
     margin-left:400px;
 }
-
-.form-groupCheckIn{
-    margin-top: 20px;
-    margin-left:40px;
-    width: 700px;
+/*---------------------------------------------------------------------------------*/
+/*VISTA 3 PROFILE */
+/*CALENDARIO*/
+.contenedorCalendar{
+    margin-left: 50px;
+    width:100%;
 }
-
+/*HORARIO*/
+.horarioProfile{
+    margin-top:80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/*-----------------------------------------------------*/
+/*VISTA 4 CREAR USUARIO*/
+.UserForm{
+    border: 2px solid gray;
+    border-radius: 80px 20px;
+    width: 650px;
+    height:760px;
+    margin-left:auto;
+    margin-top:20px;
+}
+.botonsalir{
+    float: right;
+    margin-right:250px;
+    margin-top:-38px;
+}
+/*boton crear usuario*/
+.botonCreateUser{
+    float: right;
+    margin-right: 70px;
+    margin-top: 20px;
+}
