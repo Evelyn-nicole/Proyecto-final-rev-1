@@ -1,0 +1,30 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+export const Card = () => {
+
+  const name = JSON.parse(localStorage.getItem("userLogin"));
+
+  return (
+    <div className="cardProfile">    
+        <h3 className="">Bienvenid@ {name.user.name} !</h3>
+        <div className="card mt-4">
+         
+          <div className="card-body">
+            <h5 className="card-title">{name.user.name} {name.user.last_name}</h5>
+            <p className="card-text">Correo Eléctronico: {name.user.email}</p>
+            <p className="card-text">Contacto: {name.user.phone}</p>
+            <Link to={`/Login`} className="btn btn-primary ml-5">
+              salir
+            </Link>
+            <Link to={`/Editformuser`} className="btn btn-primary ml-5">
+              editar
+            </Link>
+          </div>
+        </div>
+    
+    </div>
+  );
+};
+
+export default Card;

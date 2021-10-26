@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Navbar = () => {
+const Navbar = () => {
   return (
     <div className="container-fluid p-0">
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
-        <a className="navbar-brand" to="#">
-          Navbar
-        </a>
+      <nav className="navbar navbar-expand-lg navbar">
+        <Link className="navbar-brand logoNav text-white" to="/">
+          Enjoy Safe
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -22,14 +22,14 @@ export const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item active">
-              <Link className="nav-link" to="/">
+              <Link className="nav-link text-white" to="/">
                 Home <span className="sr-only">(current)</span>
               </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" to="#">
+              <Link className="nav-link text-white" to="#">
                 Features
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" to={`/Login`}>
@@ -37,7 +37,7 @@ export const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" to="#">
+              <Link className="nav-link text-white" to={`/Newuser`}>
                 Registrarme
               </Link>
             </li>
@@ -47,5 +47,6 @@ export const Navbar = () => {
     </div>
   );
 };
+
 
 export default Navbar;

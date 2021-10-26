@@ -1,0 +1,82 @@
+.navbar{
+    background:rgba(39, 82, 110, 0.884);
+    border-radius: 2px;
+}
+/*Logo enjoy safe del navbar*/
+.logoNav{
+    font-family:'Times New Roman', Times, serif;
+    font-size:25px !important;
+}
+/* LOGIN VISTA 2 */
+/*caja Login completa*/
+.boxLogin{  
+    margin-left:auto;  
+    margin-right:auto;  
+    margin-top: 20px;
+}
+/* formulario sesion inicio */
+.FormInicioSesion{
+    width: 650px;
+    height:350px;
+    border: 2px solid gray;
+    border-radius: 80px 20px;
+}
+/* contenido formulario */
+.form-group{
+    margin-top: 20px;
+    margin-left: 70px;
+    width: 500px;
+}
+/* boton inciar sesion */
+.botonIniciarSesion{
+    float: right;
+    margin-right: 70px;
+    margin-top: 20px;
+}
+/* boton volver home de caja login*/
+.botonCancelar{
+    float: left;
+    margin-left: 300px;
+    margin-top: 20px;
+}
+/* boton salir componente card */
+.botonCancelar2{
+    float: left;
+    margin-top: 20px;
+    margin-left:400px;
+}
+/*---------------------------------------------------------------------------------*/
+/*VISTA 3 PROFILE */
+/*CALENDARIO*/
+.contenedorCalendar{
+    margin-left: 50px;
+    width:100%;
+}
+/*HORARIO*/
+.horarioProfile{
+    margin-top:80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/*-----------------------------------------------------*/
+/*VISTA 4 CREAR USUARIO*/
+.UserForm{
+    border: 2px solid gray;
+    border-radius: 80px 20px;
+    width: 650px;
+    height:780px;
+    margin-left:auto;
+    margin-top:20px;
+}
+.botonsalir{
+    float: right;
+    margin-right:250px;
+    margin-top:-38px;
+}
+/*boton crear usuario*/
+.botonCreateUser{
+    float: right;
+    margin-right: 70px;
+    margin-top: 20px;
+}
