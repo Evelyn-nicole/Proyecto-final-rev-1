@@ -1,10 +1,40 @@
+<<<<<<< HEAD
 import React from "react";
+=======
+import React, { useEffect, useState } from "react";
+>>>>>>> 3799222c0924da87fe467a12605aae194c433704
 import "react-calendar/dist/Calendar.css";
 import Card from "../Components/Card.js";
 import CalendarClient from "../Components/Calendarclient";
 
 
 export const Profile = () => {
+<<<<<<< HEAD
+=======
+
+    const [ user, setUser ] = useState("");
+  
+    useEffect(() => {
+    fetch("http://localhost:8080/private", {
+      headers: { 
+        'Content-Type': 'Application/json',
+        'Access-Control-Allow-Origin':'*',
+        'Authorization': `Bearer + ${JSON.parse(localStorage.getItem("access_token"))}`
+      },
+      body: JSON.stringify(""),
+      method: "POST",
+    }).then((respuesta) => respuesta.json())
+    .then((data) => {
+      if (data.msg === "Token expired") {
+        localStorage.setItem("isAuth", false)
+      }
+      setUser(data.current_user)
+      
+    })
+    .catch((error) => console.error(error));
+  }, [])
+  
+>>>>>>> 3799222c0924da87fe467a12605aae194c433704
   return (
     <div className="m-5 text-center">
       <div className="row">
@@ -109,4 +139,9 @@ export default Profile;
                     {date.toDateString()}
                   </p>
                 )}
+<<<<<<< HEAD
               </div> */
+=======
+              </div> */
+
+>>>>>>> 3799222c0924da87fe467a12605aae194c433704
