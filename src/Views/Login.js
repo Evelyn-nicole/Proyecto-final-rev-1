@@ -1,12 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "../Store/appContext";
 import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
+
 export const Login = () => {
-  const { store, actions } = useContext(Context);
+  const { actions } = useContext(Context);
+
   const history = useHistory();
+
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Ingrese Email")
@@ -25,29 +28,36 @@ export const Login = () => {
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
       const config = {
-        headers: { "Content-Type": "Application/json" },
+        headers: { 
+          'Content-Type': 'Application/json',
+          'Access-Control-Allow-Origin':'*',
+        },
         body: JSON.stringify({
           email: formik.values.email,
           password: formik.values.password,
         }),
         method: "POST",
+       
       };
       fetch("http://localhost:8080/login", config)
         .then((respuesta) => respuesta.json())
         .then((data) => {
           console.log(data);
-          if (typeof data == "object") {
+          if (data.msg === "Bienvenido a tu perfil"){
             Swal.fire("Bienvenido a tu sesion");
+            localStorage.setItem("isAuth", JSON.stringify(true));
+            localStorage.setItem("access_token", JSON.stringify(data.access_token));
             actions.setProfile(data);
             let path = `profile`;
             history.push(path);
           } else {
             Swal.fire(data, { icon: "error" });
           }
-        })
+          })
         .catch((error) => console.error(error));
     },
   });
+
   return (
     <div className="container bodyLogin">
       <h1 className="tittle text-center mt-4">¡BIENVENIDO A ENJOY SAFE!</h1>
@@ -90,10 +100,10 @@ export const Login = () => {
                 ¿Olvidaste la Contraseña?
               </label>
             </div>
+
             <button
               type="submit"
-              className="botonIniciarSesion btn btn-primary"
-            >
+              className="botonIniciarSesion btn btn-primary">
               Iniciar Sesión
             </button>
             <button  className="botonCancelar btn btn-primary">
@@ -107,4 +117,5 @@ export const Login = () => {
     </div>
   );
 };
+
 export default Login;

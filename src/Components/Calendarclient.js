@@ -4,7 +4,6 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Swal from "sweetalert2";
 
-
 export const CalendarClient = () => {
 
   const [date, setDate] = useState(new Date());
@@ -13,17 +12,16 @@ export const CalendarClient = () => {
   console.log(store);
 
 
-  const reservationDate = {
-    onClick: (values) => {
-      console.log(JSON.stringify(values, null, 2));
-      const config = {
-        headers: { "Content-Type": "Application/json" },
-        body: JSON.stringify({
-          date: values.date,
-          user: store.userProfile.user.name,
-        }),
-        method:"POST"
-      };
+  const reservationDate = () => {
+    const config = {
+      headers: { "Content-Type": "Application/json" },
+      body: JSON.stringify({
+        date: date,
+        user: store.userProfile.user.name,
+      }),
+      method:"POST",
+      // mode: 'no-cors'
+    };
       fetch("http://localhost:8080/availability", config)
       .then((respuesta) => respuesta.json())
       .then((date) => {
@@ -34,9 +32,9 @@ export const CalendarClient = () => {
         } else {
           Swal.fire(date, { icon: "error "});
         }
+        setDate(date)
       })
       .catch((error) => console.error(error));
-    },
   };
 
   return (
@@ -65,8 +63,7 @@ export const CalendarClient = () => {
       )}
       <div>
         <button 
-          type="click" 
-          onclick={reservationDate}
+          onClick={reservationDate}
           className="botonReservation btn btn-danger mt-2">
           reservar dia
         </button>

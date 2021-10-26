@@ -37,7 +37,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" to={`/Newuser`}>
+              <Link className="nav-link text-white" to={`/NewUser`}>
                 Registrarme
               </Link>
             </li>

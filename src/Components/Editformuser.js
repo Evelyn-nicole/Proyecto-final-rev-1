@@ -8,15 +8,22 @@ const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
+
 export const EditFormUser = () => {
-  //const [newPasword, setNewPasword] = useState(false);
-  //const [newComfirmPassword, setNewConfirmPassword] = useState(false);
+  const [newPasword, setNewPasword] = useState(false);
+  const [newComfirmPassword, setNewConfirmPassword] = useState(false);
+
   const { actions, store } = useContext(Context);
+
   const userProfile = store.userProfile;
+
   const history = useHistory();
+
   const name = JSON.parse(localStorage.getItem("userLogin"));
+
   let id = userProfile.user ? userProfile.user.id : "";
   let token = userProfile.access_token ? userProfile.access_token : '';
+
   const formik = useFormik({
     initialValues: {
       name: name.user ? name.user.name : "",
@@ -33,8 +40,8 @@ export const EditFormUser = () => {
       ),
       name: Yup.string()
         .required("Debe ingresar su Nombre")
-        .min(4, "Short")
-        .max(20, "Long"),
+        .min(4, "muy corto")
+        .max(20, "muy largo"),
       email: Yup.string()
         .email("Ingrese Email Valido")
         .required("El email es requerido"),
@@ -58,12 +65,14 @@ export const EditFormUser = () => {
           ),
         }),
     }),
+
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
+      console.log(`Bearer ${JSON.parse(localStorage.getItem("access_token"))}`)
       const userProfile = {
         headers: {
-          "Content-Type": "Application/json",
-          "Authorization":'Bearer' + token
+          "Content-Type": "application/json",
+          "Authorization":"Bearer " + JSON.parse(localStorage.getItem("access_token"))
         },
         body: JSON.stringify({
           name: values.name,
@@ -75,17 +84,18 @@ export const EditFormUser = () => {
         method: "PUT",
         // mode: "cors",
       };
-      fetch("http://localhost:8080/edituser/", +id, userProfile)
+      fetch("http://localhost:8080/edituser/" +id, userProfile)
         .then((respuesta) => respuesta.json())
         .then((data) => {
-          actions.setProfile(data);
-          localStorage.setItem("userLogin", JSON.stringify(data));
-          console.log(data);
-          Swal.fire("tu perfil se ha cambiado con exito");
-        })
-        .then(() => {
-          let path = `login`;
-          history.push(path);
+          if (data.msg === "Token expired") {
+            actions.setProfile(data);
+            localStorage.setItem("userLogin", JSON.stringify(data));
+            localStorage.getItem("isAuth", false)
+            console.log(data);
+            Swal.fire("tu perfil se ha cambiado con exito");
+            let path = `login`;
+            history.push(path);
+          }
         })
         .catch((error) => console.error(error));
     },
@@ -94,7 +104,7 @@ export const EditFormUser = () => {
     <div className="container">
       <div className="row">
         <div className="newUser col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
-          <form className="UserForm">
+          <form className="UserForm" onSubmit={formik.handleSubmit}>
             <div className="form-group ">
               <label for="exampleInputEmail1">Nombre y Apellido</label>
               <input
@@ -222,7 +232,6 @@ export const EditFormUser = () => {
               <button
                 type="submit"
                 className="botonActualizar btn btn-primary mt-3 ml-5"
-                onClick={formik.handleSubmit}
               >
                 {" "}
                 Actualizar

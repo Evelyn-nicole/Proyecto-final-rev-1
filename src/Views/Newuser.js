@@ -1,5 +1,6 @@
 import React from "react";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
 
@@ -7,7 +8,8 @@ const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
-export const Newuser = () => {
+
+export const NewUser = () => {
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -24,8 +26,8 @@ export const Newuser = () => {
       ),
       name: Yup.string()
         .required("Debe ingresar su Nombre")
-        .min(4, "Short")
-        .max(20, "Long"),
+        .min(4, "muy corta")
+        .max(20, "muy larga"),
       email: Yup.string()
         .email("Ingrese Email Valido")
         .required("El email es requerido"),
@@ -34,8 +36,8 @@ export const Newuser = () => {
         .matches(phonereg, "Se requiere un numero valido"),
       password: Yup.string()
         .required("No ingreso contraseña")
-        .min(8, "Contraseña de 8 caracteres minimo")
-        .max(100, "Contraseña  de 20 caracteres maximo")
+        .min(8, "contraseña de 8 caracteres minimo")
+        .max(20, "Contraseña  de 20 caracteres maximo")
         .matches(lowercaseRegex, "se requiere al menos una minúscula")
         .matches(uppercaseRegex, "se requiere al menos una mayúscula")
         .matches(numericRegex, "se requiere al menos un número"),
@@ -52,8 +54,10 @@ export const Newuser = () => {
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
       const config = {
-        headers: { "Content-Type": "application/json",
-        'Access-Control-Allow-Origin':'*'},
+        headers: { 
+          "Content-Type": "Application/json",
+          'Access-Control-Allow-Origin':'*',
+        },
         body: JSON.stringify({
           name: values.name,
           email: values.email,
@@ -62,15 +66,15 @@ export const Newuser = () => {
           changepassword: values.changepassword,
         }),
         method: "POST",
-        /*mode: 'no-cors'*/
-      }
-      fetch("http://localhost:8080/Newuser", config)
+        // mode: "no-cors",
+      };
+      fetch("http://localhost:8080/newUser", config)
         .then((respuesta) => respuesta.json())
         .then((data) => {
           alert(JSON.stringify(values, null, 2));
           console.log(data);
           if (typeof data == "object") {
-            Swal.fire("Bienvenido a tu sesion");
+            Swal.fire("Usuario creado con Exito ");
           } else {
             Swal.fire(data, { icon: "error" });
           }
@@ -81,7 +85,9 @@ export const Newuser = () => {
   return (
     <div className="container">
       <h1 className="card-title text-center mt-4">Crear Nuevo Usuario</h1>
-      <h2 className="card-subtitle text-center mt-2">Ingresa tus datos para crear un nuevo usuario</h2>
+      <h2 className="card-subtitle text-center mt-2">
+        Ingresa tus datos para crear un nuevo usuario
+      </h2>
       <div className="row">
         <div className="newUser col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
           <form className="UserForm">
@@ -130,7 +136,7 @@ export const Newuser = () => {
                 className="form-control"
                 id="phone"
                 name="phone"
-                placeholder="+569 58731937"
+                placeholder="958731937"
                 value={formik.values.phone}
                 onChange={formik.handleChange}
                 required
@@ -159,7 +165,8 @@ export const Newuser = () => {
                 <div className="text-danger">{formik.errors.password}</div>
               ) : null}
               <small id="emailHelp" class="form-text text-muted">
-                Contraseña de 8 a 20 caracteres - mayusculas - numeros ej: Secpassword123
+                Contraseña de 8 a 20 caracteres - mayusculas - numeros ej:
+                Secpassword123
               </small>
             </div>
             <div className="form-group">
@@ -175,7 +182,9 @@ export const Newuser = () => {
                 error={formik.touched.changepassword}
               />
               {formik.touched.changepassword && formik.errors.changepassword ? (
-                <div className="text-danger">{formik.errors.changepassword}</div>
+                <div className="text-danger">
+                  {formik.errors.changepassword}
+                </div>
               ) : null}
               <small id="emailHelp" class="form-text text-muted">
                 Correo electronico debe coincidir
@@ -198,9 +207,14 @@ export const Newuser = () => {
               </div>
             </div>
             <div className="form-group">
+              <button className="botonVolverHome btn btn-primary mt-3 ml-5">
+                <Link className="text-white" to="/">
+                  Volver home
+                </Link>
+              </button>
               <button
                 type="submit"
-                className="botonIniciarSesion btn btn-primary w-25"
+                className="botonCrearUsuario btn btn-primary mt-3 ml-5"
                 onClick={formik.handleSubmit}
               >
                 {" "}
@@ -208,10 +222,10 @@ export const Newuser = () => {
               </button>
             </div>
           </form>
-          { }
+          {}
         </div>
       </div>
     </div>
   );
 };
-export default Newuser;
+export default NewUser;

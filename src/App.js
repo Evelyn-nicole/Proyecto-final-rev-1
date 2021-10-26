@@ -13,6 +13,7 @@ import Calendar from './Components/Calendarclient.js';
 import EditProfile from './Views/Editprofile.js';
 import EditUser from './Components/Edituser.js';
 import EditFormUser from "./Components/Editformuser.js";
+import PrivateRoute from './Components/PrivateRoute.js';
 
 
 
@@ -22,6 +23,8 @@ function App() {
             <Navbar />
           <Switch>
 
+            <PrivateRoute exact path= "/profile" component={()=><Profile />} />
+            
             <Route exact path="/">
             <Home />
             </Route>
@@ -29,12 +32,9 @@ function App() {
             <Route exact path= "/Login">
             <Login />
             </Route>
+       
 
-            <Route exact path= "/Profile">
-            <Profile />
-            </Route>
-
-            <Route path= "/Card" component={Card}>
+            <Route path= "/card" component={Card}>
             </Route>
 
             <Route path= "/calendar" component={Calendar}>
