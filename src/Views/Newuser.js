@@ -54,7 +54,10 @@ export const NewUser = () => {
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
       const config = {
-        headers: { "Content-Type": "Application/json" },
+        headers: { 
+          "Content-Type": "Application/json",
+          'Access-Control-Allow-Origin':'*',
+        },
         body: JSON.stringify({
           name: values.name,
           email: values.email,
@@ -63,7 +66,7 @@ export const NewUser = () => {
           changepassword: values.changepassword,
         }),
         method: "POST",
-        mode: "no-cors",
+        // mode: "no-cors",
       };
       fetch("http://localhost:8080/newUser", config)
         .then((respuesta) => respuesta.json())
@@ -71,7 +74,7 @@ export const NewUser = () => {
           alert(JSON.stringify(values, null, 2));
           console.log(data);
           if (typeof data == "object") {
-            Swal.fire("Bienvenido a tu sesion");
+            Swal.fire("Usuario creado con Exito ");
           } else {
             Swal.fire(data, { icon: "error" });
           }

@@ -13,16 +13,15 @@ export const CalendarClient = () => {
 
 
   const reservationDate = () => {
-
-      const config = {
-        headers: { "Content-Type": "Application/json" },
-        body: JSON.stringify({
-          date: date,
-          user: store.userProfile.user.name,
-        }),
-        method:"POST",
-        mode: 'no-cors'
-      };
+    const config = {
+      headers: { "Content-Type": "Application/json" },
+      body: JSON.stringify({
+        date: date,
+        user: store.userProfile.user.name,
+      }),
+      method:"POST",
+      // mode: 'no-cors'
+    };
       fetch("http://localhost:8080/availability", config)
       .then((respuesta) => respuesta.json())
       .then((date) => {
@@ -33,6 +32,7 @@ export const CalendarClient = () => {
         } else {
           Swal.fire(date, { icon: "error "});
         }
+        setDate(date)
       })
       .catch((error) => console.error(error));
   };

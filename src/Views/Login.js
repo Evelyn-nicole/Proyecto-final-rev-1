@@ -44,15 +44,17 @@ export const Login = () => {
         .then((respuesta) => respuesta.json())
         .then((data) => {
           console.log(data);
-          if (typeof data == "object") {
+          if (data.msg === "Bienvenido a tu perfil"){
             Swal.fire("Bienvenido a tu sesion");
+            localStorage.setItem("isAuth", JSON.stringify(true));
+            localStorage.setItem("access_token", JSON.stringify(data.access_token));
             actions.setProfile(data);
             let path = `profile`;
             history.push(path);
           } else {
             Swal.fire(data, { icon: "error" });
           }
-        })
+          })
         .catch((error) => console.error(error));
     },
   });

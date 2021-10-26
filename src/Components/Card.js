@@ -16,6 +16,10 @@ export const Card = () => {
             <h5 className="card-title">{name.user.name}</h5>
             <p className="card-text">Correo Eléctronico: {name.user.email}</p>
             <p className="card-text">Contacto: {name.user.phone}</p>
+            <button 
+            onClick={() => localStorage.setItem("isAuth", false)}>
+              salir
+            </button>
             <Link to={`/Login`} className="btn btn-primary ml-5">
               salir
             </Link>
