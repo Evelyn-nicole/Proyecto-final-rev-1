@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useState, useContext } from "react";
-=======
 import React, { useContext } from "react";
->>>>>>> 3799222c0924da87fe467a12605aae194c433704
 import { Context } from "../Store/appContext";
 import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
@@ -10,11 +6,7 @@ import * as Yup from "yup";
 import Swal from "sweetalert2";
 
 export const Login = () => {
-<<<<<<< HEAD
-  const { store, actions } = useContext(Context);
-=======
   const { actions } = useContext(Context);
->>>>>>> 3799222c0924da87fe467a12605aae194c433704
 
   const history = useHistory();
 
@@ -25,11 +17,7 @@ export const Login = () => {
     password: Yup.string()
       .required("No ingreso contraseña")
       .min(5, "contraseña de 5 caracteres minimo")
-<<<<<<< HEAD
-      .max(20, "Contraseña de 20 caracteres maximo"),
-=======
       .max(20, "Contraseña  de 20 caracteres maximo"),
->>>>>>> 3799222c0924da87fe467a12605aae194c433704
   });
 
   const formik = useFormik({
@@ -41,55 +29,36 @@ export const Login = () => {
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
       const config = {
-<<<<<<< HEAD
-        headers: { "Content-Type": "Application/json" },
-=======
         headers: { 
           'Content-Type': 'Application/json',
           'Access-Control-Allow-Origin':'*',
         },
->>>>>>> 3799222c0924da87fe467a12605aae194c433704
         body: JSON.stringify({
           email: formik.values.email,
           password: formik.values.password,
         }),
         method: "POST",
-<<<<<<< HEAD
-=======
        
->>>>>>> 3799222c0924da87fe467a12605aae194c433704
       };
       fetch("http://localhost:8080/login", config)
         .then((respuesta) => respuesta.json())
         .then((data) => {
           console.log(data);
-<<<<<<< HEAD
-          if (typeof data == "object") {
-            Swal.fire("Bienvenido a tu sesion");
-=======
           if (data.msg === "Bienvenido a tu perfil"){
             Swal.fire("Bienvenido a tu sesion");
             localStorage.setItem("isAuth", JSON.stringify(true));
             localStorage.setItem("access_token", JSON.stringify(data.access_token));
->>>>>>> 3799222c0924da87fe467a12605aae194c433704
             actions.setProfile(data);
             let path = `profile`;
             history.push(path);
           } else {
             Swal.fire(data, { icon: "error" });
           }
-<<<<<<< HEAD
-        })
-        .catch((error) => console.error(error));
-    },
-  });
-=======
           })
         .catch((error) => console.error(error));
     },
   });
 
->>>>>>> 3799222c0924da87fe467a12605aae194c433704
   return (
     <div className="container bodyLogin">
       <h1 className="tittle text-center mt-4">¡BIENVENIDO A ENJOY SAFE!</h1>
@@ -135,18 +104,10 @@ export const Login = () => {
 
             <button
               type="submit"
-<<<<<<< HEAD
-              className="botonIniciarSesion btn btn-primary"
-            >
-              Iniciar Sesión
-            </button>
-            <button className="botonCancelar btn btn-primary">
-=======
               className="botonIniciarSesion btn btn-primary">
               Iniciar Sesión
             </button>
             <button  className="botonCancelar btn btn-primary">
->>>>>>> 3799222c0924da87fe467a12605aae194c433704
               <Link className="text-white" to="/">
                 Volver home
               </Link>
@@ -158,8 +119,4 @@ export const Login = () => {
   );
 };
 
-<<<<<<< HEAD
 export default Login;
-=======
-export default Login;
->>>>>>> 3799222c0924da87fe467a12605aae194c433704

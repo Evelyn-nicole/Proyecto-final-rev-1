@@ -2,27 +2,6 @@ import React from "react";
 import EditUser from "../Components/Edituser.js";
 import EditFormUser from "../Components/Editformuser.js";
 
-<<<<<<< HEAD
-
-export const EditProfile = () => {
-    return (
-        <div className="container">
-            <div className="m-5 text-center">
-                <div className="row">
-                    <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                        <EditUser />
-                    </div>
-                    <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                        <EditFormUser />
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-export default EditProfile;
-=======
 export const EditProfile = () => {
   return (
     <div className="container">
@@ -42,4 +21,3 @@ export const EditProfile = () => {
 };
 
 export default EditProfile;
->>>>>>> 3799222c0924da87fe467a12605aae194c433704
