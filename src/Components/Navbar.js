@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../Store/appContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
+const icon = <FontAwesomeIcon icon={faTrash} />;
 
 export const Navbar = () => {
+  const { store, actions } = useContext(Context);
+
+  const Listaelem = store.Lista.map((item, indice) => {
+    return (
+      <div key={indice}>
+        <li className="">
+          <span>{item}</span>
+          <i
+            className="m-2"
+            onClick={() => {
+              actions.removerlista(indice);
+            }}
+          >
+            {icon}
+          </i>
+        </li>
+      </div>
+    );
+  });
+
   return (
     <div className="container-fluid p-0">
       <nav className="navbar navbar-expand-lg navbar">
@@ -27,8 +52,8 @@ export const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" to="#">
-                Features
+              <Link className="nav-link text-white" to={`/Mision`}>
+                Nosotros
               </Link>
             </li>
             <li className="nav-item">
@@ -40,6 +65,25 @@ export const Navbar = () => {
               <Link className="nav-link text-white" to={`/NewUser`}>
                 Registrarme
               </Link>
+            </li>
+            <li className="nav-item dropdown">
+              <Link
+                className="nav-link dropdown-toggle text-white"
+                to="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Favorites {Listaelem.length}
+              </Link>
+              <div
+                className="dropdown-menu dropdown-menu-right "
+                aria-labelledby="navbarDropdown"
+              >
+                <div className="dropdown-item pr-1">{Listaelem}</div>
+              </div>
             </li>
           </ul>
         </div>

@@ -1,23 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../Store/appContext";
+import { useHistory, Link } from "react-router-dom";
 import * as Yup from "yup";
-import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
+
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
-export const NewUser = () => {
+
+export const EditAdminUser = () => {
+
+  const { actions, store } = useContext(Context);
+
+  const userAdmin = store.userAdmin;
 
   const history = useHistory();
+
+  const name =
+    localStorage.getItem("userAdmin") == null ? {} : JSON.parse(localStorage.getItem("userAdmin"));
   
+  let id = userAdmin.superadmin ? userAdmin.superadmin.id : "";
+  let token = userAdmin.access_token ? userAdmin.access_token : "";
+
+
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
-      phone: "",
+      name: name.superadmin ? name.superadmin.name : "",
+      email: name.superadmin ? name.superadmin.email : "",
+      phone: name.superadmin ? name.superadmin.phone : "",
       password: "",
       changepassword: "",
       terms: false,
@@ -29,8 +43,8 @@ export const NewUser = () => {
       ),
       name: Yup.string()
         .required("Debe ingresar su Nombre")
-        .min(4, "muy corta")
-        .max(20, "muy larga"),
+        .min(4, "muy corto")
+        .max(20, "muy largo"),
       email: Yup.string()
         .email("Ingrese Email Valido")
         .required("El email es requerido"),
@@ -55,11 +69,11 @@ export const NewUser = () => {
         }),
     }),
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
       const config = {
-        headers: { 
-          "Content-Type": "Application/json",
-          'Access-Control-Allow-Origin':'*',
+        headers: {
+          "Content-Type": "application/json",
+        //   Authorization:
+        //     "Bearer " + JSON.parse(localStorage.getItem("access_token")),
         },
         body: JSON.stringify({
           name: values.name,
@@ -68,20 +82,20 @@ export const NewUser = () => {
           password: values.password,
           changepassword: values.changepassword,
         }),
-        method: "POST",
-        // mode: "no-cors",
+        method: "PUT",
+        
       };
-      fetch("http://localhost:8080/newUser", config)
+      fetch("http://localhost:8080/admin_edit_user/" + id, config)
         .then((respuesta) => respuesta.json())
         .then((data) => {
-          alert(JSON.stringify(values, null, 2));
-          console.log(data);
-          if (typeof data == "object") {
-            Swal.fire("Usuario creado con Exito ");
-            let path = `login`;
-            history.push(path);
+          if (data.msg === "Token expired") {
+            actions.setAdmin(data);
+            localStorage.getItem("isAuth", false);
+            console.log(data);
           } else {
-            Swal.fire(data, { icon: "error" });
+            Swal.fire(data.success);
+            let path = `loginadmin`;
+            history.push(path);
           }
         })
         .catch((error) => console.error(error));
@@ -89,13 +103,9 @@ export const NewUser = () => {
   });
   return (
     <div className="container">
-      <h1 className="card-title text-center mt-4">Crear Nuevo Usuario</h1>
-      <h2 className="card-subtitle text-center mt-2">
-        Ingresa tus datos para crear un nuevo usuario
-      </h2>
       <div className="row">
         <div className="newUser col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
-          <form className="UserForm">
+          <form className="UserForm" onSubmit={formik.handleSubmit}>
             <div className="form-group ">
               <label htmlFor="exampleInputEmail1">Nombre y Apellido</label>
               <input
@@ -130,8 +140,8 @@ export const NewUser = () => {
               {formik.touched.email && formik.errors.email ? (
                 <div className="text-danger">{formik.errors.email}</div>
               ) : null}
-              <small id="emailHelp" className="form-text text-muted">
-                Correo electronico debe contener @ ej: juanito@gmail.com
+              <small id="emailHelp" class="form-text text-muted">
+                Correo electronico debe contener @ ej: admin@admin.com
               </small>
             </div>
             <div className="form-group">
@@ -146,12 +156,12 @@ export const NewUser = () => {
                 onChange={formik.handleChange}
                 required
               />
-              <div className="invalid-tooltip">Please provide a valid Number.</div>
+              <div class="invalid-tooltip">Please provide a valid Number.</div>
               {formik.touched.phone && formik.errors.phone ? (
                 <div className="text-danger">{formik.errors.phone}</div>
               ) : null}
-              <small id="emailHelp" className="form-text text-muted">
-                Telefono debe contener +569 ej: +569 58731937
+              <small id="emailHelp" class="form-text text-muted">
+                Telefono debe contener 9 ej: 958731937
               </small>
             </div>
             <div className="form-group">
@@ -161,7 +171,7 @@ export const NewUser = () => {
                 className="form-control"
                 id="password"
                 name="password"
-                placeholder="Secpassword123"
+                placeholder="****"
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 error={formik.touched.password}
@@ -169,9 +179,9 @@ export const NewUser = () => {
               {formik.touched.password && formik.errors.password ? (
                 <div className="text-danger">{formik.errors.password}</div>
               ) : null}
-              <small id="emailHelp" className="form-text text-muted">
+              <small id="emailHelp" class="form-text text-muted">
                 Contraseña de 8 a 20 caracteres - mayusculas - numeros ej:
-                Secpassword123
+                Admin1234
               </small>
             </div>
             <div className="form-group">
@@ -181,7 +191,7 @@ export const NewUser = () => {
                 className="form-control"
                 id="changepassword"
                 name="changepassword"
-                placeholder="Secpassword123"
+                placeholder="***"
                 value={formik.values.changepassword}
                 onChange={formik.handleChange}
                 error={formik.touched.changepassword}
@@ -191,8 +201,8 @@ export const NewUser = () => {
                   {formik.errors.changepassword}
                 </div>
               ) : null}
-              <small id="emailHelp" className="form-text text-muted">
-                Correo electronico debe coincidir
+              <small id="emailHelp" class="form-text text-muted">
+                Contraseñas deben coincidir
               </small>
             </div>
             <div className="form-group">
@@ -205,25 +215,27 @@ export const NewUser = () => {
                   onChange={formik.handleChange}
                   required
                 />
-                <label htmlFor="terms">Acepto los terminos y condiciones</label>
+                <label className="ml-2" htmlFor="terms">
+                  {" "}
+                  Confimar actualización de los datos
+                </label>
                 {formik.touched.terms && formik.errors.terms ? (
                   <div className="text-danger">{formik.errors.terms}</div>
                 ) : null}
               </div>
             </div>
             <div className="form-group">
-              <button className="botonVolverHome btn btn-primary mt-3 ml-5">
+              <button className="botonVolver btn btn-primary mt-3 ml-5">
                 <Link className="text-white" to="/">
-                  Volver home
+                  Cancelar
                 </Link>
               </button>
               <button
                 type="submit"
-                className="botonCrearUsuario btn btn-primary mt-3 ml-5"
-                onClick={formik.handleSubmit}
+                className="botonActualizar btn btn-primary mt-3 ml-5"
               >
-                {" "}
-                Crear Usuario
+                {""}
+                Actualizar
               </button>
             </div>
           </form>
@@ -233,4 +245,4 @@ export const NewUser = () => {
     </div>
   );
 };
-export default NewUser;
+export default EditAdminUser;
