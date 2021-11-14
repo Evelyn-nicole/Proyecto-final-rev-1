@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import "react-calendar/dist/Calendar.css";
 import Card from "../Components/Card.js";
 import CalendarClient from "../Components/Calendarclient";
+import { Context } from '../Store/appContext';
+import { useLocation } from 'react-router-dom';
+function useQuery () {
+  return new URLSearchParams(useLocation().search)
+} 
 
-
-export const Profile = () => {
-
-    const [ user, setUser ] = useState("");
-  
+const Profile = () => {
+  const query = useQuery()
+  const { store, actions } = useContext(Context)
+  const name = query.get("name")
+  const price = query.get("price")
+  const [ user, setUser ] = useState("");
     useEffect(() => {
     fetch("http://localhost:8080/private", {
       headers: { 
@@ -28,6 +34,8 @@ export const Profile = () => {
     .catch((error) => console.error(error));
   }, [])
   
+  
+
   return (
     <div className="m-5 text-center">
       <div className="row">
@@ -42,54 +50,42 @@ export const Profile = () => {
           <div className="container">
             <div className="row">
               <div className="calendar col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-              <h5 className="mt-4 text-left">1.- Selecciona la fecha de tu Evento</h5>
-                <CalendarClient />
+                <h5 className="mt-4 text-left">1.- Selecciona la fecha de tu Evento</h5>
+                <CalendarClient name = {name} price = {price} /> 
               </div>
-
-              {/* eleccion de horario del evento */}
-              <div className="horario col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                <h5 className="mt-4">2.- Selecciona el Horario del Evento</h5>
-                <div className="form-check mt-4">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="exampleRadios"
-                    id="exampleRadios1"
-                    value="option1"
-                    checked
-                  />
-                  <label className="form-check-label" for="exampleRadios1">
-                    Desde de las 09:00am hasta las 14:00pm.
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="exampleRadios"
-                    id="exampleRadios2"
-                    value="option2"
-                  />
-                  <label className="form-check-label" for="exampleRadios2">
-                    Desde de las 16:00pm hasta las 21:00pm.
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="exampleRadios"
-                    id="exampleRadios2"
-                    value="option2"
-                  />
-                  <label className="form-check-label" for="exampleRadios2">
-                    Desde de las 23:00pm hasta las 05:00am.
-                  </label>
-                </div>
+              
+                {/* eleccion de horario del evento */}
+              <div className="mt-3 col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+             {/*    <form>
+                    <h5 className="mt-4">2.- Selecciona el tipo de evento</h5>
+                    <div className="form-check mt-4" onChange ={Radioevent}>
+                      <input className="form-check-input" type="radio" value="Fiesta de Cumpleaños" name="Eleccionfiesta"/>Fiesta de Cumpleaños
+                    </div>
+                    <div className="form-check mt-4" onChange ={Radioevent}>
+                      <input className="form-check-input" type="radio" value="Fiesta Zombie" name="Eleccionfiesta"/>Fiesta Zombie
+                    </div>
+                    <div className="form-check mt-4" onChange ={Radioevent}>
+                      <input className="form-check-input" type="radio" value="Fiesta electronica" name="Eleccionfiesta"/>Fiesta Electronica
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-4">Enviar Informacion</button>
+                  </form> */}
+                   <h5 className="text-left mt-2">2.-Elementos reservados</h5>
+                  <div className="card" style={{width: "18rem"}}>
+                    <div className="card-header"> Reservas</div>
+                      <p>{query.get("name")}</p> 
+                      <p>{query.get("price")}</p>
+                      <p> Fecha </p>
+                    <button>
+                      Reservar
+                    </button>
+                  </div>
               </div>
+    
+             
             </div>
           </div>
         </div>
+        
       </div>
     </div>
   );

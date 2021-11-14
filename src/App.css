@@ -15,4 +15,17 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 900;
   }
+
+  .fondo{
+    background: rgb(128, 211, 120);
+    
+  }
+
+  .circle {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    border-radius: 50%;
+  }
   
