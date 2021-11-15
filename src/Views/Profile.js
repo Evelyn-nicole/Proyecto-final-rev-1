@@ -2,17 +2,20 @@ import React, { useEffect, useState,useContext } from "react";
 import "react-calendar/dist/Calendar.css";
 import Card from "../Components/Card.js";
 import CalendarClient from "../Components/Calendarclient";
+import { Link } from 'react-router-dom';
 import { Context } from '../Store/appContext';
 import { useLocation } from 'react-router-dom';
 function useQuery () {
   return new URLSearchParams(useLocation().search)
 } 
 
-const Profile = () => {
+const Profile = (props) => {
   const query = useQuery()
   const { store, actions } = useContext(Context)
   const name = query.get("name")
   const price = query.get("price")
+
+  const date = store.fechas
   const [ user, setUser ] = useState("");
     useEffect(() => {
     fetch("http://localhost:8080/private", {
@@ -51,7 +54,7 @@ const Profile = () => {
             <div className="row">
               <div className="calendar col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <h5 className="mt-4 text-left">1.- Selecciona la fecha de tu Evento</h5>
-                <CalendarClient name = {name} price = {price} /> 
+                <CalendarClient name = {name} price = {price}   />  
               </div>
               
                 {/* eleccion de horario del evento */}
@@ -71,13 +74,13 @@ const Profile = () => {
                   </form> */}
                    <h5 className="text-left mt-2">2.-Elementos reservados</h5>
                   <div className="card" style={{width: "18rem"}}>
-                    <div className="card-header"> Reservas</div>
-                      <p>{query.get("name")}</p> 
-                      <p>{query.get("price")}</p>
-                      <p> Fecha </p>
-                    <button>
+                    <div className="card-header"> Resumen de tu Evento</div>
+                      <p>Nombre del evento: {query.get("name")}</p> 
+                      <p>Precio: {query.get("price")}</p>
+                      <p>Fecha seleccionada: {date}</p> 
+                    <Link to={"/Pago?name=" + name + "&price=" + price + "&date=" + date}>
                       Reservar
-                    </button>
+                    </Link>
                   </div>
               </div>
     

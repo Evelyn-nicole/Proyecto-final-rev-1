@@ -3,7 +3,7 @@ import { Context } from "../Store/appContext";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Swal from "sweetalert2";
-
+import { Link } from 'react-router-dom';
 
 
 export const CalendarClient = ({name, price}) => {
@@ -16,7 +16,6 @@ export const CalendarClient = ({name, price}) => {
   
   let id = userProfile.user ? userProfile.user.id : "";
 
- 
   const fecha = [ store.startDate.getDate(), store.startDate.getMonth(), store.startDate.getFullYear()]
   
   const fechaFinal = `${fecha[2]}-${fecha[1] + 1}-${fecha[0]}`
@@ -42,6 +41,7 @@ export const CalendarClient = ({name, price}) => {
         if (data.success) {
           Swal.fire(data.success);
           JSON.parse(localStorage.getItem('userLogin'))
+          actions.agregarFecha(fechaFinal)
         } else {
           Swal.fire(data.msg, { icon: "error " });
         }
@@ -72,7 +72,7 @@ export const CalendarClient = ({name, price}) => {
       )}
       <div>
         <button
-          onClick={reservationDate}
+          onClick={function (e) { reservationDate()}}
           className="botonReservation btn btn-danger mt-2">
           Reservar dia
         </button>

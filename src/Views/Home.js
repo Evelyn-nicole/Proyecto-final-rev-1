@@ -9,6 +9,10 @@ import { faClipboardCheck } from "@fortawesome/free-solid-svg-icons";
 import { faBiohazard } from "@fortawesome/free-solid-svg-icons";
 import { faNetworkWired } from "@fortawesome/free-solid-svg-icons";
 import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
+import $ from "jquery";
+import Popper from "popper.js";
+import { useHistory } from "react-router-dom";
 import userPhoto from "../assets/userPhoto.png";
 const icon = <FontAwesomeIcon icon={faCalendar} />
 const wallet = <FontAwesomeIcon icon={faWallet} />
@@ -19,14 +23,39 @@ const quote = <FontAwesomeIcon icon={faQuoteLeft} />
 
 
 export const Home = () => {
-    const{store, actions} = useContext(Context)
+    const { store, actions } = useContext(Context)
     useEffect(() => {
         actions.setInfo()
-    },[])
+    }, [])
+    const history = useHistory();
+    $("#btn1").click(function () {
+        Swal.fire({
+            title: "Selecciona una opción para ingresar a tu sesión",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: `Usuario`,
+            denyButtonText: `Admin`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire("Login Usuario!", "", "success");
+                let path = `login`;
+                history.push(path);
+            } else if (result.isDenied) {
+                Swal.fire("Login Administrador", "", "success");
+                let path = `loginadmin`;
+                history.push(path);
+            }
+        });
+    });
     return (
         <div>
             <div>
                 <h1>EVENTOS OFRECIDOS</h1>
+                <div className="col-lg-3">
+                    <button id="btn1" data-toggle="button" className="btn btn-outline-success btn-lg">
+                        Iniciar Sesión
+                    </button>
+                </div>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col d-flex">
@@ -34,6 +63,7 @@ export const Home = () => {
                         </div>
                     </div>
                 </div>
+             
             </div>
 
             <div style={{ background: "rgb(236, 236, 236)" }} className="p-4">

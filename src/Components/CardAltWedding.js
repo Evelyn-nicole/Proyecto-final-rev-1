@@ -11,12 +11,7 @@ export const CardAlternativeWedd = (props) => {
         actions.getLista(nombre)
     }
     const isAuth = JSON.parse(localStorage.getItem("isAuth"))
-    const Reservarelem = () => {
-        const nombres = props.data.name
-        const precio = props.data.price
-        actions.Reservarelem(nombres, precio)
-    }
-
+   
     let lat = 0
     let long = 0
     if (props.data.name === "Matrimonio Hermoso") {
@@ -52,7 +47,7 @@ export const CardAlternativeWedd = (props) => {
                         Ver mas
                     </Link>
 
-                    <button className="btn btn-primary ml-5 card-link" onClick={function (event) { Agregarelementos(); Reservarelem() }}>Agregar a Favoritos</button>
+                    <button className="btn btn-primary ml-5 card-link" onClick={function (event) { Agregarelementos()}}>Agregar a Favoritos</button>
 
                     <Link to={"/Map?long=" + long + "&lat=" + lat}
                         className="btn btn-primary ml-5 card-link mt-2">Ver en Mapa</Link>

@@ -4,6 +4,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { Route, Switch, BrowserRouter as Router} from "react-router-dom";
 import injectContext from "./Store/appContext.js";
 import Home from './Views/Home.js';
+import Pago from './Views/Pago.js';
 import Mission from './Views/Mision.js';
 import Event from './Components/Events.js';
 import Navbar from './Components/Navbar.js';
@@ -38,6 +39,10 @@ function App() {
 
             <Route exact path= "/Login">
             <Login />
+            </Route>
+
+            <Route exact path= "/Pago">
+            <Pago />
             </Route>
 
             <Route exact path= "/LoginAdmin">

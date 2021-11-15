@@ -3,6 +3,7 @@ export const getState = ({ setStore, getStore, getActions }) => {
     return {
         store: {
             users: [],
+            fechas: "",
             Reservas: [],
             Lista: [],
             // profile: [],
@@ -57,9 +58,11 @@ export const getState = ({ setStore, getStore, getActions }) => {
                 setStore({ Lista: nuevoArray })
             },
 
-            Reservarelem: (item1, item2) => {
+            agregarFecha: (fecha) => {
                 const store = getStore()
-                setStore({ Reservas: store.Reservas.concat(item1, item2) })
+                if (store.fechas === fecha) {
+                    alert("Fecha no Disponible")
+                } else { setStore({ fechas: fecha }) }
             }
         }
     }
