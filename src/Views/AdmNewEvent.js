@@ -78,7 +78,7 @@ export const AdmNewEvent = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="thematic">Ingresa el Nombre de la Thematic</label>
+              <label htmlFor="thematic">Ingresa el Nombre de la Tematica</label>
               <input
                 type="thematic"
                 className="form-control"

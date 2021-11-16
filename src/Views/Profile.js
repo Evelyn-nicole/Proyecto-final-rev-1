@@ -78,7 +78,7 @@ const Profile = (props) => {
                       <p>Nombre del evento: {query.get("name")}</p> 
                       <p>Precio: {query.get("price")}</p>
                       <p>Fecha seleccionada: {date}</p> 
-                    <Link to={"/Pago?name=" + name + "&price=" + price + "&date=" + date}>
+                    <Link to={"/Pago?name=" + name + "&price=" + price + "&date=" + date} className ="btn btn-success">
                       Reservar
                     </Link>
                   </div>

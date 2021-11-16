@@ -84,7 +84,7 @@ export const Login = () => {
   });
 
   return (
-    <div className="container bodyLogin">
+    <div className="container bodyLogin mb-3">
       <h1 className="tittle text-center mt-4">¡BIENVENIDO A ENJOY SAFE!</h1>
       <h3 className="subtitle text-center mt-5">Iniciar Sesión</h3>
       <div className="row">

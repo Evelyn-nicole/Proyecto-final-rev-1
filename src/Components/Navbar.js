@@ -45,18 +45,8 @@ export const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" to={`/Event`}>
-                Features
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link className="nav-link text-white" to={`/Mission`}>
                 Quienes Somos
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-white" to={`/Login`}>
-                Iniciar Sesión
               </Link>
             </li>
             <li className="nav-item">
@@ -81,9 +71,15 @@ export const Navbar = () => {
                 Favorites {Listaelem.length}
               </Link>
               <div className="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
-                <div className="dropdown-item pr-1">{Listaelem}</div> 
+                <div className="dropdown-item pr-1">{Listaelem}</div>
               </div>
             </li>
+
+            <div className="" style ={{background:"rgb(31, 133, 31)"}}>
+              <button id="btn1" data-toggle="button" className="btn btn-outline-success btn" style ={{color:"rgb(245, 245, 245)"}}>
+                Iniciar Sesión
+              </button>
+            </div>
 
           </ul>
         </div>

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 const Footer = () => {
     return (
-    <footer class="page-footer font-small teal pt-4 mt-5" style={{ background: "rgb(57, 201, 153)" }}>
+    <footer class="page-footer font-small teal pt-4" style={{ background: "rgb(57, 201, 153)" }}>
         <div class="container-fluid text-center text-md-left">
             <div class="row">
                 <div class="col-md-3 mt-md-0 mt-3">

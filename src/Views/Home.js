@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import CardZombieWedd from "../Components/CardZombieWedding"
+import React, { useEffect, useContext } from "react";
+//import CardZombieWedd from "../Components/CardZombieWedding"
 import CardAlternativeWedd from "../Components/CardAltWedding"
 import { Context } from '../Store/appContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,7 +11,6 @@ import { faNetworkWired } from "@fortawesome/free-solid-svg-icons";
 import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import $ from "jquery";
-import Popper from "popper.js";
 import { useHistory } from "react-router-dom";
 import userPhoto from "../assets/userPhoto.png";
 const icon = <FontAwesomeIcon icon={faCalendar} />
@@ -20,6 +19,9 @@ const s = <FontAwesomeIcon icon={faClipboardCheck} />
 const a = <FontAwesomeIcon icon={faBiohazard} />
 const aD = <FontAwesomeIcon icon={faNetworkWired} />
 const quote = <FontAwesomeIcon icon={faQuoteLeft} />
+
+const isAuth = JSON.parse(localStorage.getItem("isAuth"))
+const name = JSON.parse(localStorage.getItem("userLogin"));
 
 
 export const Home = () => {
@@ -50,12 +52,8 @@ export const Home = () => {
     return (
         <div>
             <div>
-                <h1>EVENTOS OFRECIDOS</h1>
-                <div className="col-lg-3">
-                    <button id="btn1" data-toggle="button" className="btn btn-outline-success btn-lg">
-                        Iniciar Sesión
-                    </button>
-                </div>
+                {isAuth ? <h1 className ="text-center mt-2" style ={{fontFamily:"sans-serif"}}> BIENVENIDO {name.user.name}</h1> : <h1 className ="text-center mt-2" style ={{fontFamily:"sans-serif"}}> BIENVENIDO A ENJOY SAFE</h1>}
+                <h3 className ="text-center p-1"> Aqui podras ver todos los eventos disponibles y elegir tu favorito</h3>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col d-flex">
@@ -119,7 +117,7 @@ export const Home = () => {
                         </div>
                     </div>
                     <div className="m-3">
-                        <img classname="card-img-top1" src={userPhoto} style={{ height: "50px", width: "50px" }} />
+                        <img classname="card-img-top1" src={userPhoto} alt ="UserPhoto" style={{ height: "50px", width: "50px" }} />
                     </div>
                 </div>
                 <div className="col-4 d-flex">
@@ -133,7 +131,7 @@ export const Home = () => {
                     </div>
 
                     <div className="m-3">
-                        <img classname="card-img-top1" src={userPhoto} style={{ height: "50px", width: "50px" }} />
+                        <img classname="card-img-top1" alt ="UserPhoto"src={userPhoto} style={{ height: "50px", width: "50px" }} />
                     </div>
                 </div>
             </div>

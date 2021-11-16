@@ -46,7 +46,7 @@ export const getState = ({ setStore, getStore, getActions }) => {
             getLista: (item) => {
                 const store = getStore()
                 if (store.Lista.includes(item)) {
-                    alert("Valor ya incluido")
+                    alert("Evento ya fue agregado a favoritos")
                 } else { setStore({ Lista: store.Lista.concat(item) }) }
             },
             removerlista: (i) => {

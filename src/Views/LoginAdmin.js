@@ -59,7 +59,7 @@ export const LoginAdmin = () => {
   });
 
   return (
-    <div className="container bodyLogin">
+    <div className="container bodyLogin mb-3">
       <h1 className="tittle text-center mt-4">BIENVENIDO ADMINISTRADOR</h1>
       <h3 className="subtitle text-center mt-5">Iniciar Sesión</h3>
       <div className="row">
