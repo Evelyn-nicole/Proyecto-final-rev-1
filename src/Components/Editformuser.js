@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Context } from "../Store/appContext";
 import { useHistory, Link } from "react-router-dom";
 import * as Yup from "yup";
@@ -11,8 +11,6 @@ const numericRegex = /(?=.*[0-9])/;
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 export const EditFormUser = () => {
-  const [newPasword, setNewPasword] = useState(false);
-  const [newComfirmPassword, setNewConfirmPassword] = useState(false);
 
   const { actions, store } = useContext(Context);
 
@@ -21,6 +19,7 @@ export const EditFormUser = () => {
   const history = useHistory();
 
   const name = JSON.parse(localStorage.getItem("userLogin"));
+  console.log(name)
 
   let id = userProfile.user ? userProfile.user.id : "";
   let token = userProfile.access_token ? userProfile.access_token : '';
@@ -68,12 +67,10 @@ export const EditFormUser = () => {
     }),
 
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
-      console.log(`Bearer ${JSON.parse(localStorage.getItem("access_token"))}`)
       const userProfile = {
         headers: {
           "Content-Type": "application/json",
-          "Authorization":"Bearer " + JSON.parse(localStorage.getItem("access_token"))
+          "Authorization": "Bearer " + JSON.parse(localStorage.getItem("access_token"))
         },
         body: JSON.stringify({
           name: values.name,
@@ -83,9 +80,8 @@ export const EditFormUser = () => {
           changepassword: values.changepassword,
         }),
         method: "PUT",
-        // mode: "cors",
       };
-      fetch("http://localhost:8080/edituser/" +id, userProfile)
+      fetch("http://localhost:8080/edituser/" + id, userProfile)
         .then((respuesta) => respuesta.json())
         .then((data) => {
           if (data.msg === "Token expired") {
@@ -93,7 +89,8 @@ export const EditFormUser = () => {
             localStorage.setItem("userLogin", JSON.stringify(data));
             localStorage.getItem("isAuth", false)
             console.log(data);
-            Swal.fire("tu perfil se ha cambiado con exito");
+          } else {
+            Swal.fire(data.success, "tu perfil se ha cambiado con exito");
             let path = `login`;
             history.push(path);
           }
@@ -122,7 +119,7 @@ export const EditFormUser = () => {
               {formik.touched.name && formik.errors.name ? (
                 <div className="text-danger">{formik.errors.name}</div>
               ) : null}
-              <small id="emailHelp" class="form-text text-muted">
+              <small id="emailHelp" className="form-text text-muted">
                 Nombre y Apellido ej: Juanito Perez
               </small>
             </div>
@@ -240,7 +237,7 @@ export const EditFormUser = () => {
               </button>
             </div>
           </form>
-          {}
+          { }
         </div>
       </div>
     </div>

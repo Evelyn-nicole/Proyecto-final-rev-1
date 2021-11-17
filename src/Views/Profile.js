@@ -6,14 +6,15 @@ import CalendarClient from "../Components/Calendarclient";
 
 export const Profile = () => {
 
-    const [ user, setUser ] = useState("");
+    const [ setUser ] = useState("");
+   
   
     useEffect(() => {
     fetch("http://localhost:8080/private", {
       headers: { 
         'Content-Type': 'Application/json',
         'Access-Control-Allow-Origin':'*',
-        'Authorization': `Bearer + ${JSON.parse(localStorage.getItem("access_token"))}`
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem("access_token"))}`
       },
       body: JSON.stringify(""),
       method: "POST",
@@ -21,9 +22,8 @@ export const Profile = () => {
     .then((data) => {
       if (data.msg === "Token expired") {
         localStorage.setItem("isAuth", false)
+        setUser(data.current_user)
       }
-      setUser(data.current_user)
-      
     })
     .catch((error) => console.error(error));
   }, [])
@@ -46,7 +46,8 @@ export const Profile = () => {
                 <CalendarClient />
               </div>
 
-              {/* eleccion de horario del evento */}
+
+              {/* eleccion de horario del evento
               <div className="horario col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <h5 className="mt-4">2.- Selecciona el Horario del Evento</h5>
                 <div className="form-check mt-4">
@@ -58,7 +59,7 @@ export const Profile = () => {
                     value="option1"
                     checked
                   />
-                  <label className="form-check-label" for="exampleRadios1">
+                  <label className="form-check-label" htmlFor="exampleRadios1">
                     Desde de las 09:00am hasta las 14:00pm.
                   </label>
                 </div>
@@ -70,7 +71,7 @@ export const Profile = () => {
                     id="exampleRadios2"
                     value="option2"
                   />
-                  <label className="form-check-label" for="exampleRadios2">
+                  <label className="form-check-label" htmlFor="exampleRadios2">
                     Desde de las 16:00pm hasta las 21:00pm.
                   </label>
                 </div>
@@ -82,11 +83,11 @@ export const Profile = () => {
                     id="exampleRadios2"
                     value="option2"
                   />
-                  <label className="form-check-label" for="exampleRadios2">
+                  <label className="form-check-label" htmlFor="exampleRadios2">
                     Desde de las 23:00pm hasta las 05:00am.
                   </label>
                 </div>
-              </div>
+              </div>  */}
             </div>
           </div>
         </div>
@@ -118,7 +119,6 @@ export default Profile;
                   onChange={setDate} 
                   value={date} 
                   selectRange={true} />
-
                 {date.length > 0 ? (
                   <p className="text-left">
                     <span className="bold">Inicio:</span>{" "}
@@ -133,4 +133,3 @@ export default Profile;
                   </p>
                 )}
               </div> */
-

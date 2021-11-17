@@ -16,7 +16,7 @@ export const Login = () => {
       .required("El email es requerido"),
     password: Yup.string()
       .required("No ingreso contraseña")
-      .min(5, "contraseña de 5 caracteres minimo")
+      .min(8, "contraseña de 8 caracteres minimo")
       .max(20, "Contraseña  de 20 caracteres maximo"),
   });
 
@@ -29,32 +29,39 @@ export const Login = () => {
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
       const config = {
-        headers: { 
+        headers: {
           'Content-Type': 'Application/json',
-          'Access-Control-Allow-Origin':'*',
+          'Access-Control-Allow-Origin': '*',
         },
         body: JSON.stringify({
           email: formik.values.email,
           password: formik.values.password,
         }),
         method: "POST",
-       
+
       };
       fetch("http://localhost:8080/login", config)
         .then((respuesta) => respuesta.json())
         .then((data) => {
           console.log(data);
-          if (data.msg === "Bienvenido a tu perfil"){
-            Swal.fire("Bienvenido a tu sesion");
+          if (data.success) {
+            Swal.fire(data.success);
             localStorage.setItem("isAuth", JSON.stringify(true));
             localStorage.setItem("access_token", JSON.stringify(data.access_token));
             actions.setProfile(data);
             let path = `profile`;
             history.push(path);
           } else {
-            Swal.fire(data, { icon: "error" });
+            Swal.fire(data.msg, { icon: "error " });
+            let path = `newuser`;
+            history.push(path);
           }
-          })
+          if (data.msg2) {
+            Swal.fire(data.msg2, { icon: "error " });
+            let path = `login`;
+            history.push(path);
+          }
+        })
         .catch((error) => console.error(error));
     },
   });
@@ -67,7 +74,7 @@ export const Login = () => {
         <div className="boxLogin col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
           <form className="FormInicioSesion" onSubmit={formik.handleSubmit}>
             <div className="form-group">
-              <label for="exampleInputEmail1">Correo Electronico</label>
+              <label htmlFor="exampleInputEmail1">Correo Electronico</label>
               <input
                 type="text"
                 className="form-control"
@@ -80,7 +87,7 @@ export const Login = () => {
               />
             </div>
             <div className="form-group">
-              <label for="exampleInputPassword1">Contraseña</label>
+              <label htmlFor="exampleInputPassword1">Contraseña</label>
               <input
                 type="password"
                 className="form-control"
@@ -97,7 +104,7 @@ export const Login = () => {
                 className="form-check-input"
                 id="exampleCheck1"
               />
-              <label className="form-check-label" for="exampleCheck1">
+              <label className="form-check-label" htmlFor="exampleCheck1">
                 ¿Olvidaste la Contraseña?
               </label>
             </div>
@@ -107,7 +114,7 @@ export const Login = () => {
               className="botonIniciarSesion btn btn-primary">
               Iniciar Sesión
             </button>
-            <button  className="botonCancelar btn btn-primary">
+            <button className="botonCancelar btn btn-primary">
               <Link className="text-white" to="/">
                 Volver home
               </Link>

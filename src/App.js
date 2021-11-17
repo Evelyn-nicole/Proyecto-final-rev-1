@@ -1,65 +1,125 @@
-import React from 'react';
+import React from "react";
 import $ from 'jquery';
 import Popper from 'popper.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { Route, Switch, BrowserRouter as Router} from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/js/bootstrap.bundle.min";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import injectContext from "./Store/appContext.js";
 
-import Home from './Views/Home.js';
-import Navbar from './Components/Navbar.js';
-import Login from './Views/Login.js';
-import Profile from './Views/Profile.js';
-import Newuser from './Views/Newuser.js';
-import Card from './Components/Card.js';
-import Calendar from './Components/Calendarclient.js';
-import EditProfile from './Views/Editprofile.js';
-import EditUser from './Components/Edituser.js';
+import Navbar from "./Components/Navbar.js";
+import Card from "./Components/Card.js";
+import Calendar from "./Components/Calendarclient.js";
+import EditUser from "./Components/Edituser.js";
 import EditFormUser from "./Components/Editformuser.js";
-import PrivateRoute from './Components/PrivateRoute.js';
+import PrivateRoute from "./Components/PrivateRoute.js";
+import AdmEditEvent from "./Components/AdmEditEvent.js";
+import Map from "./Components/Map.js";
+import CardAdmin from "./Components/CardAdmin.js";
+import EditAdminUser from "./Components/EditAdminUser.js";
 
-
-
+import Home from "./Views/Home.js";
+import Login from "./Views/Login.js";
+import Profile from "./Views/Profile.js";
+import Newuser from "./Views/Newuser.js";
+import EditProfile from "./Views/Editprofile.js";
+import Event from "./Views/Events.js";
+import Mision from "./Views/Mision.js";
+import AdmNewEvent from "./Views/AdmNewEvent.js";
+import LoginAdmin from "./Views/LoginAdmin.js";
+import CreateAdminUser from "./Views/CreateAdminUser.js";
+import ProfileAdmin from "./Views/ProfileAdmin.js"
 
 function App() {
-  return <Router>
-            <Navbar />
-          <Switch>
+  return (
+    <Router>
+      <Navbar />
+      <Switch>
+        <PrivateRoute
+          exact path="/Profile"
+          component={() => <Profile />} />
+        <Route
+          exact path="/">
+          <Home />
+        </Route>
+        <Route
+          exact path="/Login">
+          <Login />
+        </Route>
+        <Route
+          path="/Card"
+          component={Card}
+        ></Route>
+        <Route
+          path="/Calendar"
+          component={Calendar}
+        ></Route>
+        <Route
+          exact path="/Newuser">
+          <Newuser />
+        </Route>
+        <Route
+          exact path="/Editprofile">
+          <EditProfile />
+        </Route>
+        <Route
+          path="/Edituser"
+          component={EditUser}
+        ></Route>
+        <Route
+          path="/Editformuser"
+          component={EditFormUser}
+        ></Route>
+        <Route
+          exact path="/Event">
+          <Event />
+        </Route>
+        <Route
+          exact path="/Mision">
+          <Mision />
+        </Route>
+        <Route
+          exact path="/AdmNewEvent">
+          <AdmNewEvent />
+        </Route>
+        <Route
+          exact path="/AdmEditEvent">
+          <AdmEditEvent />
+        </Route>
+        <Route exact path="/Map">
+          <Map />
+        </Route>
 
-            <PrivateRoute exact path= "/profile" component={()=><Profile />} />
-            
-            <Route exact path="/">
-            <Home />
-            </Route>
 
-            <Route exact path= "/Login">
-            <Login />
-            </Route>
-       
+        <Route
+          path="/CardAdmin"
+          component={CardAdmin}
+        ></Route>
 
-            <Route path= "/card" component={Card}>
-            </Route>
+        <Route
+          path="/EditAdminUser"
+          component={EditAdminUser}
+        ></Route>
 
-            <Route path= "/calendar" component={Calendar}>
-            </Route>
+        <Route
+          exact path="/LoginAdmin">
+          <LoginAdmin />
+        </Route>
 
-            <Route exact path= "/Newuser">
-            <Newuser />
-            </Route>
+        <Route
+          exact path="/CreateAdminUser">
+          <CreateAdminUser />
+        </Route>
 
-            <Route exact path= "/editprofile">
-            <EditProfile />
-            </Route>
+        <Route
+          exact path="/ProfileAdmin">
+          <ProfileAdmin />
+        </Route>
 
-            <Route path= "/edituser" component={EditUser}>
-            </Route>
 
-            <Route path= "/editformuser" component={EditFormUser}>
-            </Route>
-
-            <Route render={()=><h1>Not Found error 404</h1>}></Route>
-          </Switch>
-        </Router>
-};
+        <Route render={() => <h1>Not Found error 404</h1>}></Route>
+      </Switch>
+    </Router>
+  );
+}
 
 export default injectContext(App);

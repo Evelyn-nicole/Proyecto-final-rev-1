@@ -1,5 +1,4 @@
 import React from "react";
-import EditUser from "../Components/Edituser.js";
 import EditFormUser from "../Components/Editformuser.js";
 
 export const EditProfile = () => {
