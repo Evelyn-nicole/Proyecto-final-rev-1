@@ -10,25 +10,25 @@ const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
-export const EditFormUser = () => {
+export const EditAdminUser = () => {
 
   const { actions, store } = useContext(Context);
 
-  const userProfile = store.userProfile;
+  const userAdmin = store.userAdmin;
 
   const history = useHistory();
 
-  const name = JSON.parse(localStorage.getItem("userLogin"));
-  console.log(name)
+  const name = localStorage.getItem('userAdmin') == null ? {} : JSON.parse(localStorage.getItem('userAdmin'));
+  console.log(store.admin)
   
-  let id = userProfile.user ? userProfile.user.id : "";
-  let token = userProfile.access_token ? userProfile.access_token : '';
+  let id = userAdmin.superadmin ? userAdmin.superadmin.id : "";
+  let token = userAdmin.access_token ? userAdmin.access_token : '';
 
   const formik = useFormik({
     initialValues: {
-      name: name.user ? name.user.name : "",
-      email: name.user ? name.user.email : "",
-      phone: name.user ? name.user.phone : "",
+      name: name.superadmin ? name.superadmin.name : "",
+      email: name.superadmin ? name.superadmin.email : "",
+      phone: name.superadmin ? name.superadmin.phone : "",
       password: "",
       changepassword: "",
       terms: false,
@@ -69,10 +69,10 @@ export const EditFormUser = () => {
     onSubmit: (values) => {
       // console.log(JSON.stringify(values, null, 2));
       // console.log(`Bearer ${JSON.parse(localStorage.getItem("access_token"))}`)
-      const userProfile = {
+      const config = {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + JSON.parse(localStorage.getItem("access_token"))
+          "Authorization":"Bearer " + JSON.parse(localStorage.getItem("access_token"))
         },
         body: JSON.stringify({
           name: values.name,
@@ -83,12 +83,11 @@ export const EditFormUser = () => {
         }),
         method: "PUT",
       };
-      fetch("http://localhost:8080/edituser/" + id, userProfile)
+      fetch("http://localhost:8080/admin_edit_user/" + id, config)
         .then((respuesta) => respuesta.json())
         .then((data) => {
           if (data.msg === "Token expired") {
-            actions.setProfile(data);
-            localStorage.setItem("userLogin", JSON.stringify(data));
+            actions.setAdmin(data);
             localStorage.getItem("isAuth", false)
             console.log(data);
           } else {
@@ -141,7 +140,7 @@ export const EditFormUser = () => {
                 <div className="text-danger">{formik.errors.email}</div>
               ) : null}
               <small id="emailHelp" class="form-text text-muted">
-                Correo electronico debe contener @ ej: juanito@gmail.com
+                Correo electronico debe contener @ ej: admin@admin.com
               </small>
             </div>
             <div className="form-group">
@@ -181,7 +180,7 @@ export const EditFormUser = () => {
               ) : null}
               <small id="emailHelp" class="form-text text-muted">
                 Contraseña de 8 a 20 caracteres - mayusculas - numeros ej:
-                Secpassword123
+                Admin1234
               </small>
             </div>
             <div className="form-group">
@@ -202,7 +201,7 @@ export const EditFormUser = () => {
                 </div>
               ) : null}
               <small id="emailHelp" class="form-text text-muted">
-                Correo electronico debe coincidir
+                Contraseñas deben coincidir
               </small>
             </div>
             <div className="form-group">
@@ -239,10 +238,10 @@ export const EditFormUser = () => {
               </button>
             </div>
           </form>
-          { }
+          {}
         </div>
       </div>
     </div>
   );
 };
-export default EditFormUser;
+export default EditAdminUser;

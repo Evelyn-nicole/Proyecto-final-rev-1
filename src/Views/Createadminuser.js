@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
-import { Context } from "../Store/appContext";
-import { useHistory, Link } from "react-router-dom";
+import React from "react";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
 
@@ -10,25 +9,12 @@ const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
-export const EditFormUser = () => {
-
-  const { actions, store } = useContext(Context);
-
-  const userProfile = store.userProfile;
-
-  const history = useHistory();
-
-  const name = JSON.parse(localStorage.getItem("userLogin"));
-  console.log(name)
-  
-  let id = userProfile.user ? userProfile.user.id : "";
-  let token = userProfile.access_token ? userProfile.access_token : '';
-
+const Createadminuser = () => {
   const formik = useFormik({
     initialValues: {
-      name: name.user ? name.user.name : "",
-      email: name.user ? name.user.email : "",
-      phone: name.user ? name.user.phone : "",
+      name: "",
+      email: "",
+      phone: "",
       password: "",
       changepassword: "",
       terms: false,
@@ -40,8 +26,8 @@ export const EditFormUser = () => {
       ),
       name: Yup.string()
         .required("Debe ingresar su Nombre")
-        .min(4, "muy corto")
-        .max(20, "muy largo"),
+        .min(4, "muy corta")
+        .max(20, "muy larga"),
       email: Yup.string()
         .email("Ingrese Email Valido")
         .required("El email es requerido"),
@@ -65,14 +51,12 @@ export const EditFormUser = () => {
           ),
         }),
     }),
-
     onSubmit: (values) => {
-      // console.log(JSON.stringify(values, null, 2));
-      // console.log(`Bearer ${JSON.parse(localStorage.getItem("access_token"))}`)
-      const userProfile = {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + JSON.parse(localStorage.getItem("access_token"))
+      console.log(JSON.stringify(values, null, 2));
+      const config = {
+        headers: { 
+          "Content-Type": "Application/json",
+          'Access-Control-Allow-Origin':'*',
         },
         body: JSON.stringify({
           name: values.name,
@@ -81,31 +65,32 @@ export const EditFormUser = () => {
           password: values.password,
           changepassword: values.changepassword,
         }),
-        method: "PUT",
+        method: "POST",
+        // mode: "no-cors",
       };
-      fetch("http://localhost:8080/edituser/" + id, userProfile)
+      fetch("http://localhost:8080/admin_new_user", config)
         .then((respuesta) => respuesta.json())
         .then((data) => {
-          if (data.msg === "Token expired") {
-            actions.setProfile(data);
-            localStorage.setItem("userLogin", JSON.stringify(data));
-            localStorage.getItem("isAuth", false)
-            console.log(data);
+          alert(JSON.stringify(values, null, 2));
+          console.log(data);
+          if (typeof data == "object") {
+            Swal.fire("Administrador creado con Exito");
           } else {
-            Swal.fire(data.success, "tu perfil se ha cambiado con exito");
-            let path = `login`;
-            history.push(path);
+            Swal.fire(data, { icon: "error" });
           }
         })
         .catch((error) => console.error(error));
     },
   });
-
   return (
     <div className="container">
+      <h1 className="card-title text-center mt-4">Crear Nuevo Administrador</h1>
+      <h2 className="card-subtitle text-center mt-2">
+            Ingresar datos para crear un nuevo Administrador
+      </h2>
       <div className="row">
         <div className="newUser col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
-          <form className="UserForm" onSubmit={formik.handleSubmit}>
+          <form className="UserForm">
             <div className="form-group ">
               <label for="exampleInputEmail1">Nombre y Apellido</label>
               <input
@@ -113,7 +98,7 @@ export const EditFormUser = () => {
                 className="form-control"
                 id="name"
                 name="name"
-                placeholder="Ej: Juanito Perez"
+                placeholder="Ej: Juan Perez"
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -121,8 +106,8 @@ export const EditFormUser = () => {
               {formik.touched.name && formik.errors.name ? (
                 <div className="text-danger">{formik.errors.name}</div>
               ) : null}
-              <small id="emailHelp" className="form-text text-muted">
-                Nombre y Apellido ej: Juanito Perez
+              <small id="emailHelp" class="form-text text-muted">
+                Insertar Nombre del Administrador
               </small>
             </div>
             <div className="form-group">
@@ -141,7 +126,7 @@ export const EditFormUser = () => {
                 <div className="text-danger">{formik.errors.email}</div>
               ) : null}
               <small id="emailHelp" class="form-text text-muted">
-                Correo electronico debe contener @ ej: juanito@gmail.com
+                Correo electronico debe contener @ ej: admin@admin.com
               </small>
             </div>
             <div className="form-group">
@@ -161,7 +146,7 @@ export const EditFormUser = () => {
                 <div className="text-danger">{formik.errors.phone}</div>
               ) : null}
               <small id="emailHelp" class="form-text text-muted">
-                Telefono debe contener 9 ej: 958731937
+                Telefono debe contener +569 ej: +569 58731937
               </small>
             </div>
             <div className="form-group">
@@ -171,7 +156,7 @@ export const EditFormUser = () => {
                 className="form-control"
                 id="password"
                 name="password"
-                placeholder="****"
+                placeholder="Contraseñaadmin12"
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 error={formik.touched.password}
@@ -191,7 +176,7 @@ export const EditFormUser = () => {
                 className="form-control"
                 id="changepassword"
                 name="changepassword"
-                placeholder="***"
+                placeholder="Contraseñaadmin12"
                 value={formik.values.changepassword}
                 onChange={formik.handleChange}
                 error={formik.touched.changepassword}
@@ -202,7 +187,7 @@ export const EditFormUser = () => {
                 </div>
               ) : null}
               <small id="emailHelp" class="form-text text-muted">
-                Correo electronico debe coincidir
+                Contraseña debe ser igual a la ingresada arriba
               </small>
             </div>
             <div className="form-group">
@@ -215,34 +200,32 @@ export const EditFormUser = () => {
                   onChange={formik.handleChange}
                   required
                 />
-                <label className="ml-2" htmlFor="terms">
-                  {" "}
-                  Confimar actualización de los datos
-                </label>
+                <label htmlFor="terms"  className ="m-2">Acepto los terminos y condiciones</label>
                 {formik.touched.terms && formik.errors.terms ? (
                   <div className="text-danger">{formik.errors.terms}</div>
                 ) : null}
               </div>
             </div>
             <div className="form-group">
-              <button className="botonVolver btn btn-primary mt-3 ml-5">
+              <button className="botonVolverHome btn btn-primary mt-3 ml-5">
                 <Link className="text-white" to="/">
-                  Cancelar
+                  Volver home
                 </Link>
               </button>
               <button
                 type="submit"
-                className="botonActualizar btn btn-primary mt-3 ml-5"
+                className="botonCrearUsuario btn btn-primary mt-3 ml-5"
+                onClick={formik.handleSubmit}
               >
-                {""}
-                Actualizar
+                {" "}
+                Crear Administrador
               </button>
             </div>
           </form>
-          { }
+          {}
         </div>
       </div>
     </div>
   );
 };
-export default EditFormUser;
+export default Createadminuser;

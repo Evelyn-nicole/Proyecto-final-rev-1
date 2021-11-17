@@ -1,0 +1,31 @@
+.heightcarrousel{
+    height: 400px;
+    background-position: center center;
+    background-size: cover;
+}
+
+.titulos{
+    color: rgb(217, 219, 186);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 900;
+  }
+  
+.titulosub{
+    color: rgb(117, 117, 114);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 900;
+  }
+
+  .fondo{
+    background: rgb(128, 211, 120);
+    
+  }
+
+  .circle {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    background-color: rgb(219, 218, 199);
+    border-radius: 50%;
+  }
+  

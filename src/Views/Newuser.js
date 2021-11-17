@@ -205,7 +205,7 @@ export const NewUser = () => {
                   onChange={formik.handleChange}
                   required
                 />
-                <label htmlFor="terms">Acepto los terminos y condiciones</label>
+                <label htmlFor="terms" className="ml-1">Acepto los terminos y condiciones</label>
                 {formik.touched.terms && formik.errors.terms ? (
                   <div className="text-danger">{formik.errors.terms}</div>
                 ) : null}

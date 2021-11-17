@@ -4,24 +4,21 @@ import { useHistory } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Swal from "sweetalert2";
+import { Link } from 'react-router-dom';
 
 
-
-export const CalendarClient = () => {
+export const CalendarClient = ({name, price}) => {
 
   const [date, setDate] = useState(new Date());
-
+  
   const { store, actions } = useContext(Context);
-
-  const history = useHistory();
-
+  
   const userProfile = store.userProfile;
-
+  
   let id = userProfile.user ? userProfile.user.id : "";
 
-
-  const fecha = [store.startDate.getDate(), store.startDate.getMonth(), store.startDate.getFullYear()]
-
+  const fecha = [ store.startDate.getDate(), store.startDate.getMonth(), store.startDate.getFullYear()]
+  
   const fechaFinal = `${fecha[2]}-${fecha[1] + 1}-${fecha[0]}`
   console.log(fechaFinal)
 
@@ -31,11 +28,13 @@ export const CalendarClient = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         date: fechaFinal,
-        id: userProfile.user.id,
+        user_id: userProfile.user.id,
+        name: name,
+        price: price
       }),
       method: "POST",
     }
-
+    
     fetch("http://localhost:8080/availability", config)
       .then((respuesta) => respuesta.json())
       .then((data) => {
@@ -43,8 +42,7 @@ export const CalendarClient = () => {
         if (data.success) {
           Swal.fire(data.success);
           JSON.parse(localStorage.getItem('userLogin'))
-          let path = `event`;
-          history.push(path);
+          actions.agregarFecha(fechaFinal)
         } else {
           Swal.fire(data.msg, { icon: "error " });
         }
@@ -75,10 +73,9 @@ export const CalendarClient = () => {
       )}
       <div>
         <button
-          onClick={reservationDate}
-          className="botonReservation btn btn-danger mt-2"
-        >
-          reservar dia
+          onClick={function (e) { reservationDate()}}
+          className="botonReservation btn btn-danger mt-2">
+          Reservar dia
         </button>
       </div>
     </div>
