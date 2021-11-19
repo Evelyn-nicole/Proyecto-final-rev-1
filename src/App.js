@@ -25,6 +25,7 @@ import EditAdminUser from './Components/Editadminuser.js';
 import LoginAdmin from './Views/LoginAdmin.js';
 import Profileadmin from './Views/Profileadmin.js';
 import Infoevent from './Views/InfoEvent.js';
+import Firstpage from './Views/Inicio.js';
 function App() {
   return <Router>
             <Navbar />
@@ -32,6 +33,10 @@ function App() {
             <PrivateRoute exact path= "/profile" component={()=><Profile />} />
             
             <PrivateRoute exact path= "/profileadmin" component={()=><Profileadmin />} />
+
+            <Route exact path="/Start">
+            <Firstpage/>
+            </Route>
 
             <Route exact path="/">
             <Home />
@@ -66,6 +71,10 @@ function App() {
 
             <Route exact path= "/editprofile">
             <EditProfile />
+            </Route>
+
+            <Route exact path= "/Event">
+            <Event />
             </Route>
 
             <Route exact path= "/Event">

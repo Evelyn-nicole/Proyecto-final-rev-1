@@ -42,7 +42,7 @@ const Map = () => {
   const longB = parseFloat(longA)
 
   console.log({ latab, longB })
-
+  
   return (
     <div className="container-fluid">
       <div className="row">

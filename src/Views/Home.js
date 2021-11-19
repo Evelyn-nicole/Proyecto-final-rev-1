@@ -20,16 +20,21 @@ const a = <FontAwesomeIcon icon={faBiohazard} />
 const aD = <FontAwesomeIcon icon={faNetworkWired} />
 const quote = <FontAwesomeIcon icon={faQuoteLeft} />
 
-const isAuth = JSON.parse(localStorage.getItem("isAuth"))
+const fotos = ["https://picsum.photos/id/1001/400/300", "https://picsum.photos/id/1002/400/300", "https://picsum.photos/id/1003/400/300", "https://picsum.photos/id/1004/400/300", "https://picsum.photos/id/1005/400/300"]
+
 const name = JSON.parse(localStorage.getItem("userLogin"));
 
 
 export const Home = () => {
+   
     const { store, actions } = useContext(Context)
     useEffect(() => {
         actions.setInfo()
     }, [])
+     const carta = store.event.map((evento, i) => <CardAlternativeWedd data={evento} key={i} indice={i} image={fotos[i]} />)
+    
     const history = useHistory();
+    const isAuth = JSON.parse(localStorage.getItem("isAuth"))
     $("#btn1").click(function () {
         Swal.fire({
             title: "Selecciona una opción para ingresar a tu sesión",
@@ -52,16 +57,12 @@ export const Home = () => {
     return (
         <div>
             <div>
-                {isAuth ? <h1 className ="text-center mt-2" style ={{fontFamily:"sans-serif"}}> BIENVENIDO {name.user.name}</h1> : <h1 className ="text-center mt-2" style ={{fontFamily:"sans-serif"}}> BIENVENIDO A ENJOY SAFE</h1>}
-                <h3 className ="text-center p-1"> Aqui podras ver todos los eventos disponibles y elegir tu favorito</h3>
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col d-flex">
-                            {store.event.map((evento, i) => <CardAlternativeWedd data={evento} key={i} indice={i} />)}
-                        </div>
-                    </div>
+                {isAuth ? <h1 className="text-center mt-2" style={{ fontFamily: "sans-serif" }}> BIENVENIDO {name.user.name}</h1> : <h1 className="text-center mt-2" style={{ fontFamily: "sans-serif" }}> BIENVENIDO A ENJOY SAFE</h1>}
+                <h3 className="text-center p-1"> Aqui podras ver todos los eventos disponibles y elegir tu favorito</h3>
+                <div className="container-fluid row d-flex">
+                    {carta}
                 </div>
-             
+
             </div>
 
             <div style={{ background: "rgb(236, 236, 236)" }} className="p-4">
@@ -117,7 +118,7 @@ export const Home = () => {
                         </div>
                     </div>
                     <div className="m-3">
-                        <img classname="card-img-top1" src={userPhoto} alt ="UserPhoto" style={{ height: "50px", width: "50px" }} />
+                        <img classname="card-img-top1" src={userPhoto} alt="UserPhoto" style={{ height: "50px", width: "50px" }} />
                     </div>
                 </div>
                 <div className="col-4 d-flex">
@@ -131,7 +132,7 @@ export const Home = () => {
                     </div>
 
                     <div className="m-3">
-                        <img classname="card-img-top1" alt ="UserPhoto"src={userPhoto} style={{ height: "50px", width: "50px" }} />
+                        <img classname="card-img-top1" alt="UserPhoto" src={userPhoto} style={{ height: "50px", width: "50px" }} />
                     </div>
                 </div>
             </div>
