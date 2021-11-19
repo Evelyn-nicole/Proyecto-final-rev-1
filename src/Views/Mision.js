@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Mission = (props) => {
+export const Mision = (props) => {
   
   return (
     <div className="">
@@ -176,4 +176,4 @@ export const Mission = (props) => {
     </div>
   );
 };
-export default Mission;
+export default Mision;

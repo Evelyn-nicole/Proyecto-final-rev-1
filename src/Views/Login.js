@@ -5,6 +5,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
 
+
+
 export const Login = () => {
   const { actions } = useContext(Context);
 
@@ -29,44 +31,62 @@ export const Login = () => {
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
       const config = {
-        headers: { 
-          'Content-Type': 'Application/json',
-          'Access-Control-Allow-Origin':'*',
+        headers: {
+          "Content-Type": "Application/json",
+          "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify({
           email: formik.values.email,
           password: formik.values.password,
         }),
         method: "POST",
-       
       };
       fetch("http://localhost:8080/login", config)
         .then((respuesta) => respuesta.json())
         .then((data) => {
           console.log(data);
-          if (data.success){
-            Swal.fire(data.success);
+          if (data.success) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: data.success,
+              showConfirmButton: false,
+              timer: 1600,
+            });
             localStorage.setItem("isAuth", JSON.stringify(true));
-            localStorage.setItem("access_token", JSON.stringify(data.access_token));
+            localStorage.setItem(
+              "access_token",
+              JSON.stringify(data.access_token)
+            );
             actions.setProfile(data);
             let path = `profile`;
             history.push(path);
           } else {
-            Swal.fire(data.msg, { icon: "error " }); 
+            Swal.fire({
+              icon: "error",
+              title: data.msg,
+              text: "Debes crearte un usuario",
+            });
             let path = `newuser`;
             history.push(path);
           }
-          if (data.msg2){
-            Swal.fire(data.msg2, { icon: "error " }); 
+          if (data.msg2) {
+            Swal.fire({
+              icon: "error",
+              title: data.msg2,
+              text: "Debes crearte un usuario",
+            });
             let path = `login`;
             history.push(path);
           }
-          })
+        })
         .catch((error) => console.error(error));
     },
   });
 
+  
   return (
+    
     <div className="container bodyLogin">
       <h1 className="tittle text-center mt-4">¡BIENVENIDO A ENJOY SAFE!</h1>
       <h3 className="subtitle text-center mt-5">Iniciar Sesión</h3>
@@ -111,10 +131,11 @@ export const Login = () => {
 
             <button
               type="submit"
-              className="botonIniciarSesion btn btn-primary">
+              className="botonIniciarSesion btn btn-primary"
+            >
               Iniciar Sesión
             </button>
-            <button  className="botonCancelar btn btn-primary">
+            <button className="botonCancelar btn btn-primary">
               <Link className="text-white" to="/">
                 Volver home
               </Link>

@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
 
 export const AdmNewEvent = () => {
+  const history = useHistory();
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -22,15 +24,16 @@ export const AdmNewEvent = () => {
         }),
         method: "POST",
       };
-      fetch("http://localhost:8080/admin/new_event", config)
+      fetch("http://localhost:8080/admin_new_event", config)
         .then((respuesta) => respuesta.json())
         .then((data) => {
-          alert(JSON.stringify(values, null, 2));
           console.log(data);
-          if (typeof data == "object") {
-            Swal.fire("Evento agregado con exito");
+          if (data.success) {
+            Swal.fire(data.success);
+            let path = `profileAdmin`;
+            history.push(path);
           } else {
-            Swal.fire(data, { icon: "error" });
+            Swal.fire(data.msg1, { icon: "error" });
           }
         })
         .catch((error) => console.error(error));

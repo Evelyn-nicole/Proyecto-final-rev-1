@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import GoogleMaps from "google-map-react";
 import { useLocation } from "react-router-dom";
 

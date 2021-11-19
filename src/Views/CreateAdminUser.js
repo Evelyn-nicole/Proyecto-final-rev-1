@@ -69,12 +69,10 @@ const CreateAdminUser = () => {
           changepassword: values.changepassword,
         }),
         method: "POST",
-        // mode: "no-cors",
       };
       fetch("http://localhost:8080/admin_new_user", config)
         .then((respuesta) => respuesta.json())
         .then((data) => {
-          alert(JSON.stringify(values, null, 2));
           console.log(data);
           if (typeof data == "object") {
             Swal.fire("Administrador creado con Exito");

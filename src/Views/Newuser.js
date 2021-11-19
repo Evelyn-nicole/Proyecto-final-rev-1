@@ -74,14 +74,13 @@ export const NewUser = () => {
       fetch("http://localhost:8080/newUser", config)
         .then((respuesta) => respuesta.json())
         .then((data) => {
-          alert(JSON.stringify(values, null, 2));
           console.log(data);
-          if (typeof data == "object") {
-            Swal.fire("Usuario creado con Exito ");
+          if (data.success) {
+            Swal.fire(data.success);
             let path = `login`;
             history.push(path);
           } else {
-            Swal.fire(data, { icon: "error" });
+            Swal.fire(data.msg1, { icon: "error" });
           }
         })
         .catch((error) => console.error(error));

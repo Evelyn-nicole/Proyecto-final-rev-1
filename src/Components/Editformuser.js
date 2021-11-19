@@ -90,7 +90,7 @@ export const EditFormUser = () => {
             localStorage.getItem("isAuth", false)
             console.log(data);
           } else {
-            Swal.fire(data.success, "tu perfil se ha cambiado con exito");
+            Swal.fire(data.success);
             let path = `login`;
             history.push(path);
           }

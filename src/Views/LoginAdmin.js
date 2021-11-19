@@ -43,19 +43,33 @@ export const LoginAdmin = () => {
         .then((data) => {
           console.log(data);
           if (data.success) {
-            Swal.fire(data.success);
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: data.success,
+              showConfirmButton: false,
+              timer: 1600,
+            });
             localStorage.setItem("isAuth", JSON.stringify(true));
             localStorage.setItem("access_token", JSON.stringify(data.access_token));
             actions.setAdmin(data);
             let path = `profileadmin`;
             history.push(path);
-          } else {
-            Swal.fire(data.msg, { icon: "error " }); 
-            let path = `loginadmin`;
+          } else if (data.msg1){
+            Swal.fire({
+              icon: "error",
+              title: data.msg1,
+              text: "Debes crearte un usuario",
+            });
+            let path = `createadminuser`;
             history.push(path);
           }
           if (data.msg2){
-            Swal.fire(data.msg2, { icon: "error " }); 
+            Swal.fire({
+              icon: "error",
+              title: data.msg2,
+              text: "Credenciales erroneas",
+            });
             let path = `loginadmin`;
             history.push(path);
           }
@@ -65,7 +79,7 @@ export const LoginAdmin = () => {
   });
   return (
     <div className="container bodyLogin">
-      <h1 className="tittle text-center mt-4">BIENVENIDO ADMINISTRADOR</h1>
+      <h1 className="tittle text-center mt-4">USUARIO ADMINISTRADOR</h1>
       <h3 className="subtitle text-center mt-5">Iniciar Sesión</h3>
       <div className="row">
         <div className="boxLogin col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">

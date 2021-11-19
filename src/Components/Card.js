@@ -24,7 +24,6 @@ export const Card = () => {
             <p className="card-text">Correo Eléctronico: {name.user.email}</p>
             <p className="card-text">Contacto: {name.user.phone}</p>
             <button 
-              // type={handleClick}
               className="btn btn-primary ml-5"
               onClick={handleClick}>
               salir

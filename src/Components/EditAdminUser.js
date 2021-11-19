@@ -104,7 +104,9 @@ export const EditAdminUser = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="newUser col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
+        <div className="editAdmin col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
+        <h1 className="card-title text-center mt-4">Modificar Administrador </h1>
+        <h2 className="card-subtitle text-center mt-2">Ingresa los datos que quieras modificar</h2>
           <form className="UserForm" onSubmit={formik.handleSubmit}>
             <div className="form-group ">
               <label htmlFor="exampleInputEmail1">Nombre y Apellido</label>
