@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "react-calendar/dist/Calendar.css";
 import Card from "../Components/Card.js";
 import CalendarClient from "../Components/Calendarclient";
@@ -10,12 +10,49 @@ function useQuery () {
 } 
 
 const Profile = (props) => {
+  const [val, setIsChecked] = useState();
+  const getValue = (event) => {
+    setIsChecked(event.target.value)
+  }
+
+  let time = val
+
+  function check(e) {
+    if(date ==="" || name ==="" || date ==="" || !time) {
+      alert("Faltan elementos por confirmar")
+      e.preventDefault()
+    }
+   }
+
+   console.log(time)
+   const form =
+   <div>
+       <div class="form-check">
+         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Horario Mañana: 10:00am - 14:00pm"onChange= {getValue}/> 
+         <label class="form-check-label" for="exampleRadios1">
+           Horario Mañana: 10:00am - 14:00pm
+         </label>
+       </div>
+       <div class="form-check">
+         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Horario Tarde: 15:00pm - 19:00pm" onChange= {getValue} />
+         <label class="form-check-label" for="exampleRadios2">
+           Horario Tarde: 15:00pm - 19:00pm
+         </label>
+       </div>
+       <div class="form-check">
+         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Horario Noche: 20:00pm - 02:00am" onChange= {getValue}/>
+         <label class="form-check-label" for="exampleRadios3">
+           Horario Noche: 20:00pm - 02:00am
+         </label>
+       </div>
+   </div>
+
   const query = useQuery()
   const { store, actions } = useContext(Context)
-  const name = query.get("name")
-  const price = query.get("price")
+  let name = query.get("name")
+  let price = query.get("price")
 
-  const date = store.fechas
+  let date = store.fechas
   const [ user, setUser ] = useState("");
     useEffect(() => {
     fetch("http://localhost:8080/private", {
@@ -36,8 +73,7 @@ const Profile = (props) => {
     })
     .catch((error) => console.error(error));
   }, [])
-  
-  
+
 
   return (
     <div className="m-5 text-center">
@@ -54,9 +90,13 @@ const Profile = (props) => {
             <div className="row">
               <div className="calendar col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <h5 className="mt-4 text-left">1.- Selecciona la fecha de tu Evento</h5>
-                <CalendarClient name = {name} price = {price}   />  
+                <CalendarClient name = {name} price = {price} />  
+                <div className="mt-3 text-left">
+                  <h6>Selecciona el horario de tu evento</h6>
+                  {form}
+                </div>
               </div>
-              
+            
                 {/* eleccion de horario del evento */}
               <div className="mt-3 col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
              {/*    <form>
@@ -72,15 +112,19 @@ const Profile = (props) => {
                     </div>
                     <button type="submit" class="btn btn-primary mt-4">Enviar Informacion</button>
                   </form> */}
-                   <h5 className="text-left mt-2">2.-Elementos reservados</h5>
+                  <h5 className="text-left mt-2">2.-Elementos reservados</h5>
                   <div className="card" style={{width: "18rem"}}>
                     <div className="card-header"> Resumen de tu Evento</div>
-                      <p>Nombre del evento: {query.get("name")}</p> 
-                      <p>Precio: {query.get("price")}</p>
+                      <p>Nombre del evento: {name}</p> 
+                      <p>Precio: {price}</p>
                       <p>Fecha seleccionada: {date}</p> 
-                    <Link to={"/Pago?name=" + name + "&price=" + price + "&date=" + date} className ="btn btn-success">
-                      Reservar
+                      <p>Horario Seleccionado: {time}</p> 
+
+                      <Link to={"/Pago?name=" + name + "&price=" + price + "&date=" + date + "&time=" + time} className ="btn btn-success" onClick ={check}>
+                    Reservar
                     </Link>
+               
+  
                   </div>
               </div>
     

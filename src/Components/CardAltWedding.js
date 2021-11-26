@@ -41,7 +41,7 @@ export const CardAlternativeWedd = (props) => {
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
                         <h5 class="card-title text-center mt-1">{props.data.name}</h5>
                         <div className="p-1">
-                            <Link to={`/infoevent?description=` + props.data.description + "&price=" + props.data.price + "&thematic=" + props.data.thematic} className="btn btn-primary">
+                            <Link to={`/infoevent?description=` + props.data.description + "&price=" + props.data.price + "&thematic=" + props.data.thematic + "&image=" + props.image} className="btn btn-primary">
                                 Ver mas
                             </Link>
                         </div>

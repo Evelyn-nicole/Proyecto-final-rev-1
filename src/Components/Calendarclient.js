@@ -6,18 +6,19 @@ import Swal from "sweetalert2";
 import { Link } from 'react-router-dom';
 
 
-export const CalendarClient = ({name, price}) => {
+export const CalendarClient = ({ name, price }) => {
 
   const [date, setDate] = useState(new Date());
   
+  
   const { store, actions } = useContext(Context);
-  
+
   const userProfile = store.userProfile;
-  
+
   let id = userProfile.user ? userProfile.user.id : "";
 
-  const fecha = [ store.startDate.getDate(), store.startDate.getMonth(), store.startDate.getFullYear()]
-  
+  const fecha = [store.startDate.getDate(), store.startDate.getMonth(), store.startDate.getFullYear()]
+
   const fechaFinal = `${fecha[2]}-${fecha[1] + 1}-${fecha[0]}`
   console.log(fechaFinal)
 
@@ -33,7 +34,7 @@ export const CalendarClient = ({name, price}) => {
       }),
       method: "POST",
     }
-    
+
     fetch("http://localhost:8080/availability", config)
       .then((respuesta) => respuesta.json())
       .then((data) => {
@@ -57,7 +58,8 @@ export const CalendarClient = ({name, price}) => {
         value={date}
         selected={store.startDate}
         onChange={(date) => actions.setCalendar(date)}
-        onClickDay={(value) => alert(`Esta es tu fecha seleccionada ${value}`)}
+        onClickDay={(value) => alert(`Esta es tu fecha seleccionada ${value}`)
+      }
       />
       {date.length > 0 ? (
         <p className="text-left">
@@ -72,7 +74,7 @@ export const CalendarClient = ({name, price}) => {
       )}
       <div>
         <button
-          onClick={function (e) { reservationDate()}}
+          onClick={function (e) { reservationDate() }}
           className="botonReservation btn btn-danger mt-2">
           Reservar dia
         </button>

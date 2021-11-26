@@ -12,13 +12,15 @@ const icon = <FontAwesomeIcon icon={faTrash} />
 function refreshPage(){ 
   window.location.reload(); 
 }
-function change(){
-  localStorage.setItem("isAuth", false)
-} 
+
 export const Navbar = () => {
+  const { store, actions } = useContext(Context)
   const history = useHistory();
   const isAuth = JSON.parse(localStorage.getItem("isAuth"))
-  const { store, actions } = useContext(Context)
+  function change(){
+    localStorage.setItem("isAuth", false)
+  } 
+
 
   isAuth ? console.log("N") :  $("#btn1").click(function () {
     Swal.fire({
@@ -109,10 +111,9 @@ export const Navbar = () => {
             </li>
 
             <div className="" style ={{background:"rgb(31, 133, 31)"}}>
-            { !isAuth ? <button id="btn1" data-toggle="button" className="btn btn-outline-success btn"  type="submit" style ={{color:"rgb(245, 245, 245)"}} onClick ={() => localStorage.setItem("isAuth", true)  }>Iniciar Sesión</button> : <Link to={`/`} className="btn btn-alert" onClick={() => { refreshPage(); change();}} type="submit" >
-            Cerrar Sesion </Link> }
+            { !isAuth ? <Link id="btn1" to={`/#`} data-toggle="button" className="btn btn-outline-success btn"  style ={{color:"rgb(245, 245, 245)"}}>Iniciar Sesión</Link> : <button to={`/#`} className="btn btn-alert" onClick={() => { refreshPage(); change();}} type="submit">
+            Cerrar Sesion </button> }
             </div>
-
           </ul>
         </div>
       </nav>

@@ -22,11 +22,8 @@ const quote = <FontAwesomeIcon icon={faQuoteLeft} />
 
 const fotos = ["https://picsum.photos/id/1001/400/300", "https://picsum.photos/id/1002/400/300", "https://picsum.photos/id/1003/400/300", "https://picsum.photos/id/1004/400/300", "https://picsum.photos/id/1005/400/300"]
 
-const name = JSON.parse(localStorage.getItem("userLogin"));
-
-
 export const Home = () => {
-   
+    const name = JSON.parse(localStorage.getItem("userLogin"));
     const { store, actions } = useContext(Context)
     useEffect(() => {
         actions.setInfo()

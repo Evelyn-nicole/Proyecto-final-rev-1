@@ -1,5 +1,4 @@
-import React, { useEffect, useContext } from 'react';
-import { Context } from '../Store/appContext';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 function useQuery() {
@@ -16,7 +15,7 @@ const Infoevent = (prop) => {
       <div className="card mb-3 mt-4">
         <div className="row g-0">
           <div className="col-md-4">
-            <img src="https://picsum.photos/id/1003/400/300" className="img " alt="..." />
+            <img src={query.get("image")} className="img " alt="..." />
           </div>
           <div className="col-md-8">
             <div className="card-body d-flex justify-content-center flex-column align-items-center" >
