@@ -32,7 +32,7 @@ export const Mision = (props) => {
         </p>
       </div>
 
-      <div className="row no-gutters">
+      <div className="row no-gutters" style={{ background: "rgb(231, 231, 231)" }}>
         <div className="col-6 d-flex flex-column justify-content-center">
           <div className="d-flex justify-content-center w-25 mx-auto">
             <p
@@ -49,7 +49,7 @@ export const Mision = (props) => {
             </p>
           </div>
         </div>
-        <div className="col-6">
+        <div className="col-6 ">
           <img
             src="https://picsum.photos/id/55/700/400"
             className="w-100"

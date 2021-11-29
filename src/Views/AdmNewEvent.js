@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory  } from "react-router-dom";
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
 
@@ -45,11 +45,11 @@ export const AdmNewEvent = () => {
       <h2 className="card-subtitle text-center mt-4">
         Ingresa los datos al formulario para agregar un nuevo evento
       </h2>
-      <div className="row">
-        <div className="admNewEvent col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
-          <form className="admNewEventForm text-center mt-5">
-            <div className="form-group">
-              <label htmlFor="name">Ingresa el Nombre del Nuevo Evento</label>
+      <div className="mx-auto mt-5">
+        <div className="admNewEvent">
+          <form className="admNewEventForm mt-5 bg-light h5">
+            <div className="form-group mt-5">
+              <label htmlFor="name">Nuevo Evento</label>
               <input
                 type="text"
                 className="form-control"
@@ -62,7 +62,7 @@ export const AdmNewEvent = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="thematic">Ingresa el Nombre de la Thematic</label>
+              <label htmlFor="thematic">Nombre de la Thematic</label>
               <input
                 type="thematic"
                 className="form-control"
@@ -75,42 +75,41 @@ export const AdmNewEvent = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="description">
-                Agrega la Description del Evento
-              </label>
+              <label htmlFor="description">Description del Evento</label>
               <input
                 type="text"
                 className="form-control"
                 id="description"
                 name="description"
-                placeholder="Ej: Fragmento de un escrito con unidad temática, que queda diferenciado del resto de fragmentos por un punto y aparte y generalmente también por llevar letra mayúscula inicial y un espacio en blanco en el margen izquierdo de alineación del texto principal de la primera línea."
+                placeholder="Ej: Fragmento de un escrito con unidad temática."
                 value={formik.values.description}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="price">Ingresa el Valor del Evento</label>
+              <label htmlFor="price">Valor del Evento</label>
               <input
                 type="price"
                 className="form-control"
                 id="price"
                 name="price"
-                placeholder="Ej: $10.000"
+                placeholder="Ej: 200000"
                 value={formik.values.price}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
             </div>
-            <div className="form-group">
-              <button className="botonAdmCancelar btn btn-primary mt-3 ml-5">
+
+            <div className="float-right mt-5 mr-5">
+              <button className="botonAdmCancelar btn btn-primary mr-3">
                 <Link className="text-white" to="/">
                   Cancelar
                 </Link>
               </button>
               <button
                 type="submit"
-                className="botonAdmCreateEvent btn btn-primary mt-3 ml-5"
+                className="botonAdmCreateEvent btn btn-primary mr-4"
                 onClick={formik.handleSubmit}
               >
                 {" "}

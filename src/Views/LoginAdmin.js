@@ -51,11 +51,14 @@ export const LoginAdmin = () => {
               timer: 1600,
             });
             localStorage.setItem("isAuth", JSON.stringify(true));
-            localStorage.setItem("access_token", JSON.stringify(data.access_token));
+            localStorage.setItem(
+              "access_token",
+              JSON.stringify(data.access_token)
+            );
             actions.setAdmin(data);
             let path = `profileadmin`;
             history.push(path);
-          } else if (data.msg1){
+          } else if (data.msg1) {
             Swal.fire({
               icon: "error",
               title: data.msg1,
@@ -64,7 +67,7 @@ export const LoginAdmin = () => {
             let path = `createadminuser`;
             history.push(path);
           }
-          if (data.msg2){
+          if (data.msg2) {
             Swal.fire({
               icon: "error",
               title: data.msg2,
@@ -78,61 +81,64 @@ export const LoginAdmin = () => {
     },
   });
   return (
-    <div className="container bodyLogin">
+    <div className="container">
       <h1 className="tittle text-center mt-4">USUARIO ADMINISTRADOR</h1>
       <h3 className="subtitle text-center mt-5">Iniciar Sesión</h3>
-      <div className="row">
-        <div className="boxLogin col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
-          <form className="FormInicioSesion" onSubmit={formik.handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Correo Electronico</label>
-              <input
-                type="text"
-                className="form-control"
-                id="email"
-                name="email"
-                placeholder="jane@acme.com"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                error={formik.touched.email}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Contraseña</label>
-              <input
-                type="password"
-                className="form-control w-100"
-                id="password"
-                name="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                error={formik.touched.password}
-              />
-            </div>
-            <div className="form-group form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="exampleCheck1"
-              />
-              <label className="form-check-label" htmlFor="exampleCheck1">
-                ¿Olvidaste la Contraseña?
-              </label>
-            </div>
+      <div className="mx-auto mt-5">
+        <form
+          className="FormInicioSesion bg-light"
+          onSubmit={formik.handleSubmit}
+        >
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">Correo Electronico</label>
+            <input
+              type="text"
+              className="form-control"
+              id="email"
+              name="email"
+              placeholder="jane@acme.com"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="exampleInputPassword1">Contraseña</label>
+            <input
+              type="password"
+              className="form-control w-100"
+              id="password"
+              name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password}
+            />
+          </div>
+          <div className="form-group form-check">
+            <input
+              type="checkbox"
+              className="form-check-input"
+              id="exampleCheck1"
+            />
+            <label className="form-check-label" htmlFor="exampleCheck1">
+              ¿Olvidaste la Contraseña?
+            </label>
+          </div>
+          <div className="float-right mr-5">
             <button
               type="submit"
-              className="botonIniciarSesion btn btn-primary"
+              className="botonIniciarSesion btn btn-primary mr-3"
             >
               Iniciar Sesión
             </button>
-            <button className="botonCancelar btn btn-primary">
+            <button className="botonCancelar btn btn-primary mr-4">
               <Link className="text-white" to="/">
                 Volver home
               </Link>
             </button>
-          </form>
-          {/* */}
-        </div>
+          </div>
+        </form>
+        {/* */}
       </div>
     </div>
   );

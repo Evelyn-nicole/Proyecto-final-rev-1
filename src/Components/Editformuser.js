@@ -90,7 +90,11 @@ export const EditFormUser = () => {
             localStorage.getItem("isAuth", false)
             console.log(data);
           } else {
-            Swal.fire(data.success);
+            Swal.fire({
+              icon: "success",
+              title: data.success,
+              text: "ingresa con tu usuario y clave",
+            });
             let path = `login`;
             history.push(path);
           }
@@ -101,11 +105,10 @@ export const EditFormUser = () => {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="newUser col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
-          <form className="UserForm" onSubmit={formik.handleSubmit}>
+        <div className="mx-auto mt-5">
+          <form className="FormInicioSesion2 bg-light" onSubmit={formik.handleSubmit}>
             <div className="form-group ">
-              <label for="exampleInputEmail1">Nombre y Apellido</label>
+              <label htmlFor="exampleInputEmail1">Nombre y Apellido</label>
               <input
                 type="text"
                 className="form-control"
@@ -124,7 +127,7 @@ export const EditFormUser = () => {
               </small>
             </div>
             <div className="form-group">
-              <label for="exampleInputPassword1">Correo Electronico</label>
+              <label htmlFor="exampleInputPassword1">Correo Electronico</label>
               <input
                 type="email"
                 className="form-control"
@@ -143,7 +146,7 @@ export const EditFormUser = () => {
               </small>
             </div>
             <div className="form-group">
-              <label for="phone">Telefono</label>
+              <label htmlFor="phone">Telefono</label>
               <input
                 type="text"
                 className="form-control"
@@ -163,7 +166,7 @@ export const EditFormUser = () => {
               </small>
             </div>
             <div className="form-group">
-              <label for="exampleInputPassword1">Contraseña</label>
+              <label htmlFor="exampleInputPassword1">Contraseña</label>
               <input
                 type="password"
                 className="form-control"
@@ -183,7 +186,7 @@ export const EditFormUser = () => {
               </small>
             </div>
             <div className="form-group">
-              <label for="confirmpassword">Repetir Contraseña</label>
+              <label htmlFor="confirmpassword">Repetir Contraseña</label>
               <input
                 type="password"
                 className="form-control"
@@ -222,15 +225,15 @@ export const EditFormUser = () => {
                 ) : null}
               </div>
             </div>
-            <div className="form-group">
-              <button className="botonVolver btn btn-primary mt-3 ml-5">
+            <div className="float-right mr-5">
+              <button className="botonVolver btn btn-primary mr-3">
                 <Link className="text-white" to="/">
                   Cancelar
                 </Link>
               </button>
               <button
                 type="submit"
-                className="botonActualizar btn btn-primary mt-3 ml-5"
+                className="botonActualizar btn btn-primary mr-4"
               >
                 {" "}
                 Actualizar
@@ -239,7 +242,7 @@ export const EditFormUser = () => {
           </form>
           {}
         </div>
-      </div>
+      
     </div>
   );
 };

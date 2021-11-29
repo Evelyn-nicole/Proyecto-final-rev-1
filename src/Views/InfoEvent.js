@@ -48,16 +48,26 @@
 // export default InfoEvent;
 import React, { useEffect, useContext } from "react";
 import { Context } from "../Store/appContext";
+import { Link, useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import $ from "jquery";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const InfoEvent = (prop) => {
+const InfoEvent = (props) => {
+  const { actions } = useContext(Context);
+
+  const name = JSON.parse(localStorage.getItem("userLogin"));
+  console.log(name);
+
+  const isAuth = JSON.parse(localStorage.getItem("isAuth"));
+
+  const history = useHistory();
 
   const query = useQuery();
-  
+
   return (
     <div className="container">
       <div className="card mb-3 mt-4">
@@ -71,7 +81,10 @@ const InfoEvent = (prop) => {
           </div>
           <div className="col-md-8">
             <div className="card-body d-flex justify-content-center flex-column align-items-center">
-              <h3>Descripcion del Evento</h3>
+              <h2>Evento</h2>
+              <p className="card-text align-items-center">
+                Nombre: {query.get("name")}
+              </p>
               <p className="card-text align-items-center">
                 {query.get("description")}
               </p>
@@ -80,6 +93,25 @@ const InfoEvent = (prop) => {
                 <p>Precio: {query.get("price")} </p>
               </div>
             </div>
+          </div>
+          <div className="p-1">
+            {isAuth ? (
+              <Link
+                className="btn btn-primary card-link p-2"
+                to={
+                  "/Profile?name=" +
+                  props.data.name +
+                  "&price=" +
+                  props.data.price
+                }
+              >
+                Reservar
+              </Link>
+            ) : (
+              <Link className="btn btn-primary card-link p-2" to={`/Login`}>
+                Reservar{" "}
+              </Link>
+            )}
           </div>
         </div>
       </div>

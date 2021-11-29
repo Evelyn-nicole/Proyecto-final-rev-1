@@ -1,44 +1,40 @@
+body{
+  background-color:whitesmoke !important;
+  background: url('./assets/fondo.jpg') no-repeat;
+  background-size: cover;
+}
+
 /*NAVBAR logo enjoy safe*/
 .navbar {
+  opacity:0.93;
+  filter:alpha(opacity=0.93); 
   border-radius: 6px;
+  background-image: url(
+    https://p4.wallpaperbetter.com/wallpaper/712/644/866/starry-sky-stars-universe-violet-wallpaper-preview.jpg);
   font-family: "Times New Roman", Times, serif;
 }
-/*Logo enjoy safe del navbar*/
-.logoNav {
-  font-family: "Times New Roman", Times, serif;
-  font-size: 20px !important;
-}
-/* LOGIN VISTA 2 */
-/*caja Login completa*/
-.boxLogin {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
+
+.userPhoto {
+  padding: 80px;
+  margin-top: -60px;
+
 }
 /* formulario sesion inicio */
 .FormInicioSesion {
-  width: 650px;
   height: 350px;
   border: 2px solid gray;
   border-radius: 80px 20px;
+  box-shadow: 0 0 10px 10px rgba(138, 138, 138, 0.993);
+}
+.FormInicioSesion2 {
+  height: 750px;
+  border: 2px solid gray;
+  border-radius: 80px 20px;
+  box-shadow: 0 0 10px 10px rgba(138, 138, 138, 0.993);
 }
 /* contenido formulario */
 .form-group {
-  margin-top: 20px;
-  margin-left: 70px;
-  width: 500px;
-}
-/* boton inciar sesion */
-.botonIniciarSesion {
-  float: right;
-  margin-right: 70px;
-  margin-top: 20px;
-}
-/* boton volver home de caja login*/
-.botonCancelar {
-  float: left;
-  margin-left: 300px;
-  margin-top: 20px;
+  margin: 20px 70px;
 }
 /* boton salir componente card */
 .botonCancelar2 {
@@ -47,29 +43,7 @@
   margin-left: 400px;
 }
 /*---------------------------------------------------------------------------------*/
-/*VISTA 3 PROFILE */
-/*CALENDARIO*/
-.contenedorCalendar {
-  margin-left: 50px;
-  width: 100%;
-}
-/*HORARIO*/
-.horarioProfile {
-  margin-top: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/*-----------------------------------------------------*/
-/*VISTA 4 CREAR USUARIO*/
-.UserForm {
-  border: 2px solid gray;
-  border-radius: 80px 20px;
-  width: 650px;
-  height: 780px;
-  margin-left: auto;
-  margin-top: 20px;
-}
+
 .botonsalir {
   float: right;
   margin-right: 250px;
@@ -83,23 +57,46 @@
 }
 /* FORMULARIO ADMINSTRADOR NUEVO EVENTO ---------------------------- */
 .admNewEventForm {
+  height: 550px;
   border: 2px solid gray;
-  border-radius: 25px;
-  width: 650px;
-  height: auto;
-  margin-left: auto;
-  margin-top: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px 10px rgba(138, 138, 138, 0.993);
 }
 /* -------------------------------------------------------------------------- */
 /* ICONO CORAZON FAVORITOS */
 .iconoHeart {
-  color: rgba(216, 10, 10, 0.979);
-  font-size: 30px;
+  color: rgb(196, 10, 10);
+  font-size: 45px;
   float: right;
-  margin-right: 25px;
-  margin-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 5px;
 }
 .iconoHeart:hover {
-  font-size: 38px;
+  font-size: 57px;
   text-decoration: underline;
+}
+
+/* ICONO VER MAPA*/
+.iconoLocation{
+  color: green;
+  font-size:45px;
+  float:right;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 5px;
+  }
+.iconoLocation:hover{
+  font-size: 57px;
+  text-decoration:underline;
+}
+  
+.calendarBox {
+  width: 100% !important;
+}
+
+.cardProfile {
+  box-shadow: 0 0 10px 10px rgba(138, 138, 138, 0.993);
+  height: 650px;
+  background-color: aqua;
 }

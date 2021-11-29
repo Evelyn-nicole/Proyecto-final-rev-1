@@ -228,10 +228,8 @@ import { faNetworkWired } from "@fortawesome/free-solid-svg-icons";
 import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import $ from "jquery";
-
 import CardAlternativeWedd from "../Components/CardAltWedding.js";
 import userPhoto from "../assets/userPhoto.png";
-
 
 const icon = <FontAwesomeIcon icon={faCalendar} />;
 const wallet = <FontAwesomeIcon icon={faWallet} />;
@@ -240,21 +238,39 @@ const a = <FontAwesomeIcon icon={faBiohazard} />;
 const aD = <FontAwesomeIcon icon={faNetworkWired} />;
 const quote = <FontAwesomeIcon icon={faQuoteLeft} />;
 
-const isAuth = JSON.parse(localStorage.getItem("isAuth"));
-const name = JSON.parse(localStorage.getItem("userLogin"));
+const fotos = [
+  "https://lavetis.es/wp-content/uploads/2019/07/editorial-en-mazagon-190305-by-rosa-garrido-263.jpg",
+  "https://picsum.photos/id/1002/400/300",
+  "https://picsum.photos/id/1003/400/300",
+  "https://picsum.photos/id/1004/400/300",
+  "https://picsum.photos/id/1005/400/300",
+];
+
+const styloPhoto = {
+  width: "auto",
+  height: "100px"
+}
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+
   const history = useHistory();
   
+  const name = JSON.parse(localStorage.getItem("userLogin"));
+  
+  const isAuth = JSON.parse(localStorage.getItem("isAuth"));
+  
+  const carta = store.event.map((evento, i) => (
+    <CardAlternativeWedd data={evento} key={i} indice={i} image={fotos[i]}/>
+  ));
+
   useEffect(() => {
     actions.setInfo();
   }, []);
 
-
   $("#btn1").click(function () {
     Swal.fire({
-      title: "Selecciona una opción",
+      title: "Selecciona una opción para ingresar a tu sesión",
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: `Usuario`,
@@ -274,64 +290,53 @@ export const Home = () => {
 
   return (
     <div>
-      <div>
+      <div className="container-fluid">
         {isAuth ? (
           <h1 className="text-center mt-2" style={{ fontFamily: "sans-serif" }}>
             {" "}
-            {/* BIENVENIDO {name.user.name} */}
+            BIENVENIDO 
           </h1>
         ) : (
-          <h1 className="text-center mt-2" style={{ fontFamily: "sans-serif" }}>
+          <h1 className="text-center mt-4" style={{ fontFamily: "sans-serif" }}>
             {" "}
-            Lo hacemos por ti !
+            Lo hacemos por ti !!!
           </h1>
         )}
-        <div>
-          
-        </div>
-        <h3 className="text-center p-1">
+        <h3 className="text-center mt-3 p-1">
           {" "}
-          Aqui podras ver todos los eventos disponibles y elegir tu favorito
+          Selecciona el evento de tus sueños 🖤 
         </h3>
-        <div className="container px-4 px-lg-5">
-          <div className="row">
-            <div className="col d-flex">
-              {store.event.map((evento, i) => (
-                <CardAlternativeWedd data={evento} key={i} indice={i} />
-              ))}
-            </div>
-          </div>
-        </div>
+        <div className="container-fluid row m-0">{carta}</div>
       </div>
 
       <div style={{ background: "rgb(236, 236, 236)" }} className="p-4">
         <h2 className="text-center pb-5"> Beneficios Ofrecidos </h2>
         <div className="row container-fluid d-flex justify-content-around text-center">
-          <div className="col-2">
+          <div className="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2">
             <span style={{ color: "rgb(128, 211, 120)", fontSize: "24px" }}>
               {icon}
             </span>
             <p>Agendar Eventos a eleccion</p>
           </div>
-          <div className="col-2">
+          <div className="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2">
             <span style={{ color: "rgb(128, 211, 120)", fontSize: "24px" }}>
               {wallet}
             </span>
             <p>Precios Accesibles</p>
           </div>
-          <div className="col-2">
+          <div className="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2">
             <span style={{ color: "rgb(128, 211, 120)", fontSize: "24px" }}>
               {s}
             </span>
             <p>Personalizar a su medida </p>
           </div>
-          <div className="col-2">
+          <div className="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2">
             <span style={{ color: "rgb(128, 211, 120)", fontSize: "24px" }}>
               {a}
             </span>
             <p>Asegurar cumplimiento de Normativa COVID</p>
           </div>
-          <div className="col-2">
+          <div className="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2">
             <span style={{ color: "rgb(128, 211, 120)", fontSize: "24px" }}>
               {aD}
             </span>

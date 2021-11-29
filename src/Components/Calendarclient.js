@@ -54,9 +54,9 @@ export const CalendarClient = ({ name, price }) => {
   };
 
   return (
-    <div className="calendarClient mt-4">
+    <div className="calendarClient mt-4" style={{ width: "100%" }}>
       <Calendar
-        className="calendarBox mt-4"
+        className="calendarBox mt-4 "
         minDate={new Date()}
         value={date}
         selected={store.startDate}

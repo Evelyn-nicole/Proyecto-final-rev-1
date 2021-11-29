@@ -9,8 +9,8 @@ export const EditProfile = () => {
         <h2 className="card-subtitle text-center mt-2">
           Ingresa los datos que quieras modificar
         </h2>
-        <div className="row">
-          <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+        <div className="">
+          <div className="">
             <EditFormUser />
           </div>
         </div>

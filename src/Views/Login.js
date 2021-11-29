@@ -7,10 +7,15 @@ import Swal from "sweetalert2";
 
 
 
+
+
 export const Login = () => {
   const { actions } = useContext(Context);
 
   const history = useHistory();
+
+  
+  
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -83,16 +88,15 @@ export const Login = () => {
         .catch((error) => console.error(error));
     },
   });
-
+ 
   
   return (
     
     <div className="container bodyLogin">
-      <h1 className="tittle text-center mt-4">¡BIENVENIDO A ENJOY SAFE!</h1>
-      <h3 className="subtitle text-center mt-5">Iniciar Sesión</h3>
-      <div className="row">
-        <div className="boxLogin col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
-          <form className="FormInicioSesion" onSubmit={formik.handleSubmit}>
+      <h1 className="tittle text-center mt-4">¡BIENVENIDO A YOUR EVENT!</h1>
+      <h3 className="subtitle text-center mt-5">Inicio Sesión Usuario</h3>
+      <div className="mx-auto mt-5">
+          <form className="FormInicioSesion bg-light" onSubmit={formik.handleSubmit}>
             <div className="form-group">
               <label htmlFor="exampleInputEmail1">Correo Electronico</label>
               <input
@@ -128,20 +132,21 @@ export const Login = () => {
                 ¿Olvidaste la Contraseña?
               </label>
             </div>
-
+            <div className="float-right mr-5"> 
             <button
               type="submit"
-              className="botonIniciarSesion btn btn-primary"
+              className="botonIniciarSesion btn btn-primary mr-3 "
             >
               Iniciar Sesión
             </button>
-            <button className="botonCancelar btn btn-primary">
+            <button className="botonCancelar btn btn-primary mr-4">
               <Link className="text-white" to="/">
                 Volver home
               </Link>
             </button>
+
+            </div>
           </form>
-        </div>
       </div>
     </div>
   );

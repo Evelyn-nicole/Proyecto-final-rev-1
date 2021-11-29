@@ -2,12 +2,11 @@ import React from "react";
 import GoogleMaps from "google-map-react";
 import { useLocation } from "react-router-dom";
 
-
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-export const Map = () => {
+const Map = () => {
   const query = useQuery();
 
   const lata = query.get("lat");

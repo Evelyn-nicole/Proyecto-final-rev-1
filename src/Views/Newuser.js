@@ -76,11 +76,21 @@ export const NewUser = () => {
         .then((data) => {
           console.log(data);
           if (data.success) {
-            Swal.fire(data.success);
+            Swal.fire({
+              icon: "success",
+              title: data.success,
+              text: "ingresa con tu correo y clave",
+            });
             let path = `login`;
             history.push(path);
           } else {
-            Swal.fire(data.msg1, { icon: "error" });
+            Swal.fire({
+              icon: "error",
+              title: data.msg1,
+              text: "debes ingresar como usuario",
+            });
+            let path = `login`;
+            history.push(path);
           }
         })
         .catch((error) => console.error(error));
@@ -92,9 +102,8 @@ export const NewUser = () => {
       <h2 className="card-subtitle text-center mt-2">
         Ingresa tus datos para crear un nuevo usuario
       </h2>
-      <div className="row">
-        <div className="newUser col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
-          <form className="UserForm">
+      <div className="mx-auto mt-5">
+          <form className="FormInicioSesion2 bg-light">
             <div className="form-group ">
               <label htmlFor="exampleInputEmail1">Nombre y Apellido</label>
               <input
@@ -160,7 +169,7 @@ export const NewUser = () => {
                 className="form-control"
                 id="password"
                 name="password"
-                placeholder="Secpassword123"
+                placeholder="********"
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 error={formik.touched.password}
@@ -180,7 +189,7 @@ export const NewUser = () => {
                 className="form-control"
                 id="changepassword"
                 name="changepassword"
-                placeholder="Secpassword123"
+                placeholder="********"
                 value={formik.values.changepassword}
                 onChange={formik.handleChange}
                 error={formik.touched.changepassword}
@@ -210,15 +219,15 @@ export const NewUser = () => {
                 ) : null}
               </div>
             </div>
-            <div className="form-group">
-              <button className="botonVolverHome btn btn-primary mt-3 ml-5">
+            <div className="float-right mr-5">
+              <button className="botonVolverHome btn btn-primary mr-3">
                 <Link className="text-white" to="/">
                   Volver home
                 </Link>
               </button>
               <button
                 type="submit"
-                className="botonCrearUsuario btn btn-primary mt-3 ml-5"
+                className="botonCrearUsuario btn btn-primary mr-4"
                 onClick={formik.handleSubmit}
               >
                 {" "}
@@ -228,7 +237,6 @@ export const NewUser = () => {
           </form>
           {}
         </div>
-      </div>
     </div>
   );
 };

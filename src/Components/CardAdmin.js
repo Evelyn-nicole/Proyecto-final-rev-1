@@ -45,8 +45,8 @@ const CardAdmin = () => {
 
   return (
     <div className="cardProfile">    
-        <h3 className="">Bienvenid@ {name.superadmin.name} !</h3>
         <div className="card mt-4">
+        <h3 className="">Bienvenid@ {name.superadmin.name} !</h3>
           <img classname="card-img-top1" src={userPhoto}/>
           <div className="card-body">
             <h5 className="card-title">{name.superadmin.name}</h5>

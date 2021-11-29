@@ -103,10 +103,10 @@ export const EditAdminUser = () => {
   });
   return (
     <div className="container">
-      <div className="row">
-        <div className="editAdmin col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
+      <div className="mx-auto mt-5">
         <h1 className="card-title text-center mt-4">Modificar Administrador </h1>
         <h2 className="card-subtitle text-center mt-2">Ingresa los datos que quieras modificar</h2>
+        <div className="FormInicioSesion2 bg-light mt-5">
           <form className="UserForm" onSubmit={formik.handleSubmit}>
             <div className="form-group ">
               <label htmlFor="exampleInputEmail1">Nombre y Apellido</label>
@@ -226,15 +226,15 @@ export const EditAdminUser = () => {
                 ) : null}
               </div>
             </div>
-            <div className="form-group">
-              <button className="botonVolver btn btn-primary mt-3 ml-5">
+            <div className="float-right mr-5">
+              <button className="botonVolver btn btn-primary mr-3">
                 <Link className="text-white" to="/">
                   Cancelar
                 </Link>
               </button>
               <button
                 type="submit"
-                className="botonActualizar btn btn-primary mt-3 ml-5"
+                className="botonActualizar btn btn-primary mr-4"
               >
                 {""}
                 Actualizar

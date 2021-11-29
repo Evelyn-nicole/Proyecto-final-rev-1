@@ -13,9 +13,9 @@ const Pago = () => {
 
   return (
     <div className="d-flex" style={{ background: "rgb(219, 218, 199)" }}>
-      <div className="col-sm-12 col-md-12 col-lg-3 col-xl-3">
+      {/* <div className="col-sm-12 col-md-12 col-lg-3 col-xl-3">
         <Card />
-      </div>
+      </div> */}
 
       <div className="col-sm-12 col-md-12 col-lg-3 col-xl-3 d-flex flex-column justify-content-center mx-auto">
         <div
@@ -39,7 +39,7 @@ const Pago = () => {
               id="button"
               data-toggle="button"
               className="btn btn-lg"
-              onClick={Pagar}
+              onClick={Pago}
             >
               Pagar
             </button>

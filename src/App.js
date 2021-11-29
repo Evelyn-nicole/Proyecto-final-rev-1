@@ -29,6 +29,7 @@ import LoginAdmin from "./Views/LoginAdmin.js";
 import CreateAdminUser from "./Views/CreateAdminUser.js";
 import ProfileAdmin from "./Views/ProfileAdmin.js";
 import InfoEvent from "./Views/InfoEvent.js";
+import Pago from "./Views/Pago.js"
 
 
 function App() {
@@ -87,6 +88,10 @@ function App() {
 
         <Route exact path="/infoEvent">
           <InfoEvent />
+        </Route>
+
+        <Route exact path="/Pago">
+          <Pago />
         </Route>
 
         <Route render={() => <h1>Not Found error 404</h1>}></Route>
