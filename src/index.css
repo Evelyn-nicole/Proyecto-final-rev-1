@@ -1,19 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Estonia&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
 body{
-  background-color:whitesmoke !important;
-  background: url('./assets/fondo.jpg') no-repeat;
-  background-size: cover;
+  background: url(./assets/fondo13.jpg);
+  background-size:contain;
 }
 
 /*NAVBAR logo enjoy safe*/
 .navbar {
-  opacity:0.93;
+  opacity:0.85;
   filter:alpha(opacity=0.93); 
   border-radius: 6px;
+  box-shadow: 0 0 12px 10px rgba(0, 0, 0, 0.644);
   background-image: url(
     https://p4.wallpaperbetter.com/wallpaper/712/644/866/starry-sky-stars-universe-violet-wallpaper-preview.jpg);
-  font-family: "Times New Roman", Times, serif;
 }
-
 .userPhoto {
   padding: 80px;
   margin-top: -60px;
@@ -96,7 +98,70 @@ body{
 }
 
 .cardProfile {
-  box-shadow: 0 0 10px 10px rgba(138, 138, 138, 0.993);
-  height: 650px;
-  background-color: aqua;
+  box-shadow: 0 0 16px 10px rgba(0, 0, 0, 0.644);
+  height: 640px;
+  background-color: rgba(245, 245, 245, 0.829);
+}
+.page-footer{
+  opacity:0.85;
+  filter:alpha(opacity=0.93); 
+  border-radius: 6px;
+  box-shadow: 0 0 12px 10px black;
+  background-image: url(
+    https://p4.wallpaperbetter.com/wallpaper/712/644/866/starry-sky-stars-universe-violet-wallpaper-preview.jpg);
+}
+/* titulos */
+.textoHome{
+  font-family: 'Lobster', cursive;
+  font-size:55px;
+  color:white;
+}
+.textoSubtitulo{
+  font-family: 'Lobster', cursive;
+  font-size:35px;
+  color:white;
+}
+/* texto navbar */
+.textoNav{
+  font-family: 'Estonia', cursive;
+  font-size:45px;
+  color:white;
+}
+.textoNavMiPerfil{
+  font-family: 'Estonia', cursive;
+  font-size:35px;
+  color:white;
+}
+/* boton nav inicio y cierre sesion */
+.buttonNav{
+  font-family: 'Estonia', cursive;
+  font-size:30px;
+  color:white;
+}
+.buttonNavCerrar{
+  font-family: 'Estonia', cursive;
+  font-size:30px;
+  color:black;
+}
+.beneficiosHome{
+  font-family: 'Lobster', cursive;
+  font-size:20px;
+}
+
+
+.tituloLogin{
+  font-family: 'Courgette', cursive;
+  font-size:55px;
+  color:white;
+}
+.subtituloLogin{
+  font-family: 'Courgette', cursive;
+  font-size:35px;
+  color:white;
+}
+.cardReservar{
+  border:1px solid black;
+  margin-top: 50px;
+  margin-left: 15px;
+  margin-right: 15px;
 }

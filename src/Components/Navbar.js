@@ -112,9 +112,8 @@ function change() {
   localStorage.setItem("isAuth", false);
 }
 
-export const Navbar = () => {
+export const Navbar = (props) => {
   const { store, actions } = useContext(Context);
-
   const history = useHistory();
   const isAuth = JSON.parse(localStorage.getItem("isAuth"));
 
@@ -142,32 +141,42 @@ export const Navbar = () => {
 
   const Listaelem = store.Lista.map((item, indice) => {
     return (
-      <div key={indice}>
-        <li className="">
-          <span>{item}</span>
-          <i
-            className="m-2"
-            onClick={() => {
-              actions.removerlista(indice);
-            }}
-          >
-            {icon}
-          </i>
-        </li>
-      </div>
+      <li className="dropdown-item" key={indice}>
+        <span>{item}</span>
+        <i
+          className="m-2"
+          onClick={() => {
+            actions.removerlista(indice);
+          }}
+        >
+          {icon}
+        </i>
+      </li>
     );
   });
+
+  const verPerfil = () => {
+    const nombre = props.data.name;
+    isAuth
+      ? localStorage.setItem("isAuth", JSON.stringify(true))
+      : Swal.fire({
+          icon: "info",
+          title: "Debes iniciar sesión",
+          text: "para agregar eventos a favoritos",
+        });
+  };
 
   return (
     <div className="container-fluid p-0">
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <Link className="navbar-brand logoNav text-white" to="/">
           <img
-            className="logoNav m-0 ml-3"
+            className="logoNav m-0 ml-5"
             src={logonav2}
             style={{ width: "150px", height: "120px" }}
           />
         </Link>
+
         <button
           className="navbar-toggler"
           type="button"
@@ -185,30 +194,39 @@ export const Navbar = () => {
         >
           <ul className="navbar-nav ml-auto mb-2">
             <li className="nav-link active">
-              {/* <Link className="nav-link text-white" to="/">
-                Home <span className="sr-only">(current)</span>
-              </Link> */}
+              <Link className="nav-link text-white" to="/">
+                <span className="textoNav">Eventos</span>{" "}
+                <span className="sr-only">(current)</span>
+              </Link>
             </li>
             <li className="nav-link active">
               <Link className="nav-link text-white" to={`/Mision`}>
-                <h5>Nosotros</h5>
+                <span className="textoNav">Nosotros</span>
               </Link>
             </li>
             <li className="nav-link active">
               <Link className="nav-link text-white" to={`/NewUser`}>
-                <h5>Registrate</h5>
+                <span className="textoNav">Registrate</span>
               </Link>
             </li>
+
             <li className="nav-link active text-white dropdown">
-              <Link className="nav-link text-white">
-                <h5>Favoritos {Listaelem.length}</h5>
-              </Link>
-              <div
+              <a
+                className="nav-link dropdown-toggle text-white"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span className="textoNav">Favorites </span>
+                {Listaelem.length}
+              </a>
+              <ul
                 className="dropdown-menu text-white dropdown-menu-right "
                 aria-labelledby="navbarDropdown"
               >
-                <div className="dropdown-item pr-1">{Listaelem}</div>
-              </div>
+                {Listaelem}
+              </ul>
             </li>
 
             <div className="nav-link text-white">
@@ -217,28 +235,40 @@ export const Navbar = () => {
                   id="btn1"
                   to={`/`}
                   data-toggle="button"
-                  className="btn btn-success"
+                  className="btn btn-danger mt-3"
                   type="submit"
                   onClick={() => {
                     localStorage.setItem("isAuth", true);
                     change();
                   }}
                 >
-                  <h5 className="mt-1">Iniciar Sesión</h5>
+                  <span className="buttonNav">Iniciar Sesión</span>
                 </button>
               ) : (
-                <Link
-                  to={`/login`}
-                  className="btn btn-warning"
-                  onClick={() => {
-                    localStorage.setItem("isAuth", false);
-                    refreshPage();
-                    change();
-                  }}
-                  type="submit"
-                >
-                  <h5 className="mt-1">Cerrar Sesion</h5>{" "}
-                </Link>
+                <div>
+                  <div className="nav-link text-white">
+                  <li className="nav-link active">
+                    <Link
+                      className="nav-link text-white textoNavMiPerfil"
+                      to={`/Profile`}
+                    >
+                      <span>Mi Perfil</span>
+                    </Link>
+                  </li>
+                  </div>
+                  <Link
+                    to={`/login`}
+                    className="btn btn-success mt-3"
+                    onClick={() => {
+                      localStorage.setItem("isAuth", false);
+                      refreshPage();
+                      change();
+                    }}
+                    type="submit"
+                  >
+                    <span className="buttonNavCerrar">Cerrar Sesion</span>{" "}
+                  </Link>
+                </div>
               )}
             </div>
           </ul>

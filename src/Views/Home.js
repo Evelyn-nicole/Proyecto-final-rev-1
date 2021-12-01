@@ -218,7 +218,7 @@
 // export default Home;
 import React, { useEffect, useContext } from "react";
 import { Context } from "../Store/appContext";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { faWallet } from "@fortawesome/free-solid-svg-icons";
@@ -248,20 +248,20 @@ const fotos = [
 
 const styloPhoto = {
   width: "auto",
-  height: "100px"
-}
+  height: "100px",
+};
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
   const history = useHistory();
-  
+
   const name = JSON.parse(localStorage.getItem("userLogin"));
-  
+
   const isAuth = JSON.parse(localStorage.getItem("isAuth"));
-  
+
   const carta = store.event.map((evento, i) => (
-    <CardAlternativeWedd data={evento} key={i} indice={i} image={fotos[i]}/>
+    <CardAlternativeWedd data={evento} key={i} indice={i} image={fotos[i]} />
   ));
 
   useEffect(() => {
@@ -291,53 +291,60 @@ export const Home = () => {
   return (
     <div>
       <div className="container-fluid">
+        
         {isAuth ? (
-          <h1 className="text-center mt-2" style={{ fontFamily: "sans-serif" }}>
-            {" "}
-            BIENVENIDO 
-          </h1>
+          <div>
+            <h1 className="text-center mt-5 text-white textoHome">
+              {" "}
+              BIENVENIDO A YOUR EVENT
+            </h1>
+            <h3 className="text-center mt-5 p-1 text-white textoSubtitulo ">
+              {" "}
+              Aqui podrás selecciona el evento de tus sueños
+            </h3>
+          </div>
         ) : (
-          <h1 className="text-center mt-4" style={{ fontFamily: "sans-serif" }}>
+          <h1 className="textoHome text-center mt-5 text-white">
             {" "}
-            Lo hacemos por ti !!!
+            Lo hacemos por ti !
           </h1>
         )}
-        <h3 className="text-center mt-3 p-1">
-          {" "}
-          Selecciona el evento de tus sueños 🖤 
-        </h3>
-        <div className="container-fluid row m-0">{carta}</div>
+           
+        <div className="container-fluid row m-0 mt-5">{carta}</div>
       </div>
 
-      <div style={{ background: "rgb(236, 236, 236)" }} className="p-4">
-        <h2 className="text-center pb-5"> Beneficios Ofrecidos </h2>
+      <div
+        style={{ background: "rgb(236, 236, 236)" }}
+        className="p-4 beneficiosHome"
+      >
+        <h2 className="text-center pb-5"> Beneficios de Your Event </h2>
         <div className="row container-fluid d-flex justify-content-around text-center">
           <div className="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2">
-            <span style={{ color: "rgb(128, 211, 120)", fontSize: "24px" }}>
+            <span style={{ color: "rgb(128, 211, 120)", fontSize: "50px" }}>
               {icon}
             </span>
-            <p>Agendar Eventos a eleccion</p>
+            <p>Eventos a eleccion</p>
           </div>
           <div className="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2">
-            <span style={{ color: "rgb(128, 211, 120)", fontSize: "24px" }}>
+            <span style={{ color: "rgb(128, 211, 120)", fontSize: "50px" }}>
               {wallet}
             </span>
             <p>Precios Accesibles</p>
           </div>
           <div className="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2">
-            <span style={{ color: "rgb(128, 211, 120)", fontSize: "24px" }}>
+            <span style={{ color: "rgb(128, 211, 120)", fontSize: "50px" }}>
               {s}
             </span>
-            <p>Personalizar a su medida </p>
+            <p>Tematicas increibles</p>
           </div>
           <div className="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2">
-            <span style={{ color: "rgb(128, 211, 120)", fontSize: "24px" }}>
+            <span style={{ color: "rgb(128, 211, 120)", fontSize: "50px" }}>
               {a}
             </span>
-            <p>Asegurar cumplimiento de Normativa COVID</p>
+            <p>Normativa COVID</p>
           </div>
           <div className="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2">
-            <span style={{ color: "rgb(128, 211, 120)", fontSize: "24px" }}>
+            <span style={{ color: "rgb(128, 211, 120)", fontSize: "50px" }}>
               {aD}
             </span>
             <p>Integracion entre cliente/proveedor </p>
@@ -345,8 +352,7 @@ export const Home = () => {
         </div>
       </div>
 
-      <h2 className="text-center mt-3 mb-3">Lo que dicen de nosotros</h2>
-      <div className="row container-fluid">
+      {/* <div className="row container-fluid">
         <div className="col-4 d-flex">
           <div>
             <span>{quote}</span>
@@ -422,7 +428,7 @@ export const Home = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

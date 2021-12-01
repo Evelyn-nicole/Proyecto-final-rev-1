@@ -20,11 +20,11 @@ export const Card = () => {
         <h5 className="card-title">{name.user.name}</h5>
         <p className="card-text">Correo Eléctronico: {name.user.email}</p>
         <p className="card-text">Contacto: {name.user.phone}</p>
-        <button className="btn btn-primary ml-5" onClick={handleClick}>
-          salir
+        <button className="btn btn-primary ml-2" onClick={handleClick}>
+          Cerrar Sesión
         </button>
-        <Link to={`/editprofile`} className="btn btn-primary ml-5">
-          editar
+        <Link to={`/editprofile`} className="btn btn-primary ml-4">
+          Editar Perfil
         </Link>
       </div>
     </div>

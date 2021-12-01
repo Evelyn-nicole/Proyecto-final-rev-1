@@ -1,6 +1,4 @@
 import React from "react";
-import $ from "jquery";
-import Popper from "popper.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import injectContext from "./Store/appContext.js";

@@ -6,16 +6,10 @@ import * as Yup from "yup";
 import Swal from "sweetalert2";
 
 
-
-
-
 export const Login = () => {
   const { actions } = useContext(Context);
 
   const history = useHistory();
-
-  
-  
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -93,8 +87,8 @@ export const Login = () => {
   return (
     
     <div className="container bodyLogin">
-      <h1 className="tittle text-center mt-4">¡BIENVENIDO A YOUR EVENT!</h1>
-      <h3 className="subtitle text-center mt-5">Inicio Sesión Usuario</h3>
+      <h1 className="tituloLogin text-center mt-4">BIENVENIDO A YOUR EVENT</h1>
+      <h3 className="subtituloLogin text-center mt-5">Iniciar Sesión</h3>
       <div className="mx-auto mt-5">
           <form className="FormInicioSesion bg-light" onSubmit={formik.handleSubmit}>
             <div className="form-group">

@@ -219,7 +219,10 @@ export const CardAlternativeWedd = (props) => {
                   "&price=" +
                   props.data.price +
                   "&thematic=" +
-                  props.data.thematic
+                  props.data.thematic +
+                  "&name=" + 
+                  props.data.name
+                
                 }
                 className="">
                 <h4>Ver Descripción</h4>

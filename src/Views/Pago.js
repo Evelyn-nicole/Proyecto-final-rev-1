@@ -1,6 +1,7 @@
 import React from "react";
-import Card from "../Components/Card";
 import { useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import Card from "../Components/Card";
 import Swal from "sweetalert2";
 import $ from "jquery";
 
@@ -9,20 +10,38 @@ function useQuery() {
 }
 const Pago = () => {
   const query = useQuery();
+  const history = useHistory();
   
+  $("#btn3").click(function () {
+    Swal.fire({
+      title: 'Auto close alert!',
+      html: 'I will close in <b></b> milliseconds.',
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        const b = Swal.getHtmlContainer().querySelector('b')
+        
+      },
+      
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
+  });
+
 
   return (
-    <div className="d-flex" style={{ background: "rgb(219, 218, 199)" }}>
-      {/* <div className="col-sm-12 col-md-12 col-lg-3 col-xl-3">
-        <Card />
-      </div> */}
-
-      <div className="col-sm-12 col-md-12 col-lg-3 col-xl-3 d-flex flex-column justify-content-center mx-auto">
+    <div className="container">
+      <div className="row justify-content-center mx-auto">
+      <h1 className="text-center mt-5 text-white textoHome">Pagar Reservación del evento</h1>
         <div
           className="card"
-          style={{ width: "18rem", background: "rgb(165, 157, 47)" }}
+          style={{ width: "40rem", background: "rgb(165, 157, 47)" }}
         >
-          <div className="card-header" style={{ color: "white" }}>
+          <div className="card-header textoNav text-center" style={{ color: "white" }}>
             Resumen de la reserva
           </div>
           <ul className="list-group list-group-flush">
@@ -36,9 +55,9 @@ const Pago = () => {
               Fecha del Evento: {query.get("date")}
             </li>
             <button
-              id="button"
+              id="btn3"
               data-toggle="button"
-              className="btn btn-lg"
+              className="btn btn-lg text-white textoHome"
               onClick={Pago}
             >
               Pagar

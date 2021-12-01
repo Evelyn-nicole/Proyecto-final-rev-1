@@ -90,8 +90,8 @@ function useQuery() {
 }
 
 const Profile = (props) => {
-  const { store, actions } = useContext(Context);
-  const [user, setUser] = useState("");
+  const { store } = useContext(Context);
+  const [ setUser] = useState("");
   
   const query = useQuery();
   let name = query.get("name");
@@ -121,12 +121,12 @@ const Profile = (props) => {
   }, []);
 
   return (
-    <div className=" text-center container-fluid px-5" >
-      <h1 className="tittleProfile text-center">PLANIFICA TU EVENTO</h1>
-      <h2 className="subTittleProfile text-center mt-3">
-        Aqui podrás seleccionar los datos de tu evento
+    <div className="container-fluid px-5" >
+      <h1 className="tituloLogin text-center mt-4">PLANIFICA TU EVENTO</h1>
+      <h2 className="subtituloLogin text-center mt-5">
+        Aqui podrás seleccionar la fecha de tu Evento
       </h2>
-      <div className="row mt-5">
+      <div className="row mt-5 text-center ">
         <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4 ">
           <Card />
         </div>
@@ -134,8 +134,9 @@ const Profile = (props) => {
         <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4 ">
           <div className="card cardProfile">
             <div className="card-header h4">
-              Selecciona la fecha de tu Evento
+              Calendario de Eventos
             </div>
+            <h6 className="text-center mt-5">Aqui podrás seleccionar la fecha en que deseas que se realice tu evento previamente seleccionado</h6>
             <div className="card-body">
               <CalendarClient name={name} price={price} />
             </div>
@@ -145,15 +146,20 @@ const Profile = (props) => {
         <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4 ">
           <div className="card cardProfile">
             <div className="card-header h4">Elementos reservados</div>
-            <p>Nombre del evento: {query.get("name")}</p>
-            <p>Precio: {query.get("price")}</p>
-            <p>Fecha seleccionada: {date}</p>
+            <h6 className="text-center mt-5">Aqui puedes ver el resumen de el evento y fecha que seleccionaste</h6>
+            <div className="cardReservar">
+            <p className="text-left ml-3 mt-2"> Nombre del evento: {query.get("name")}</p>
+            <p className="text-left ml-3"> Fecha seleccionada: {date}</p>
+            <p className="text-left ml-3"> Precio: {query.get("price")}</p>
+            </div>
+            <div>
             <Link
               to={"/Pago?name=" + name + "&price=" + price + "&date=" + date}
-              className="btn btn-success"
+              className="btn btn-success mt-4 mb-3"
             >
               Reservar
             </Link>
+            </div>
           </div>
         </div>
       </div>

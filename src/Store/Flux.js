@@ -98,20 +98,20 @@ export const getState = ({ setStore, getStore, getActions }) => {
 
       setProfile: (data) => {
         localStorage.setItem("userLogin", JSON.stringify(data));
-        const store = getStore();
+        // const store = getStore();
         setStore({ userProfile: data });
       },
       setAdmin: (data) => {
         localStorage.setItem("userAdmin", JSON.stringify(data));
-        const store = getStore();
+        // const store = getStore();
         setStore({ userAdmin: data });
       },
       setCalendar: (date) => {
-        const store = getStore();
+        // const store = getStore();
         setStore({ startDate: date });
       },
       setUser: (data) => {
-        const store = getStore();
+        // const store = getStore();
         setStore({ users: data.user });
       },
       getLista: (item) => {
