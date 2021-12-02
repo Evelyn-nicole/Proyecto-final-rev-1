@@ -104,8 +104,8 @@ export const EditAdminUser = () => {
   return (
     <div className="container">
       <div className="mx-auto mt-5">
-        <h1 className="card-title text-center mt-4">Modificar Administrador </h1>
-        <h2 className="card-subtitle text-center mt-2">Ingresa los datos que quieras modificar</h2>
+        <h1 className="card-title text-center mt-4 tituloLogin">Modificar Administrador </h1>
+        <h2 className="card-subtitle text-center mt-2 textoSubtitulo">Ingresa los datos que quieras modificar</h2>
         <div className="FormInicioSesion2 bg-light mt-5">
           <form className="UserForm" onSubmit={formik.handleSubmit}>
             <div className="form-group ">
@@ -142,7 +142,7 @@ export const EditAdminUser = () => {
               {formik.touched.email && formik.errors.email ? (
                 <div className="text-danger">{formik.errors.email}</div>
               ) : null}
-              <small id="emailHelp" class="form-text text-muted">
+              <small id="emailHelp" className="form-text text-muted">
                 Correo electronico debe contener @ ej: admin@admin.com
               </small>
             </div>
@@ -158,11 +158,11 @@ export const EditAdminUser = () => {
                 onChange={formik.handleChange}
                 required
               />
-              <div class="invalid-tooltip">Please provide a valid Number.</div>
+              <div className="invalid-tooltip">Please provide a valid Number.</div>
               {formik.touched.phone && formik.errors.phone ? (
                 <div className="text-danger">{formik.errors.phone}</div>
               ) : null}
-              <small id="emailHelp" class="form-text text-muted">
+              <small id="emailHelp" className="form-text text-muted">
                 Telefono debe contener 9 ej: 958731937
               </small>
             </div>
@@ -181,7 +181,7 @@ export const EditAdminUser = () => {
               {formik.touched.password && formik.errors.password ? (
                 <div className="text-danger">{formik.errors.password}</div>
               ) : null}
-              <small id="emailHelp" class="form-text text-muted">
+              <small id="emailHelp" className="form-text text-muted">
                 Contraseña de 8 a 20 caracteres - mayusculas - numeros ej:
                 Admin1234
               </small>
@@ -203,7 +203,7 @@ export const EditAdminUser = () => {
                   {formik.errors.changepassword}
                 </div>
               ) : null}
-              <small id="emailHelp" class="form-text text-muted">
+              <small id="emailHelp" className="form-text text-muted">
                 Contraseñas deben coincidir
               </small>
             </div>
@@ -228,7 +228,7 @@ export const EditAdminUser = () => {
             </div>
             <div className="float-right mr-5">
               <button className="botonVolver btn btn-primary mr-3">
-                <Link className="text-white" to="/">
+                <Link className="text-white" to={"/ProfileAdmin"}>
                   Cancelar
                 </Link>
               </button>

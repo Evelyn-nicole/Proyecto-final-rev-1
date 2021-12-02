@@ -26,13 +26,13 @@ body{
   height: 350px;
   border: 2px solid gray;
   border-radius: 80px 20px;
-  box-shadow: 0 0 10px 10px rgba(138, 138, 138, 0.993);
+  box-shadow: 0 0 16px 10px rgba(0, 0, 0, 0.644);
 }
 .FormInicioSesion2 {
   height: 750px;
   border: 2px solid gray;
   border-radius: 80px 20px;
-  box-shadow: 0 0 10px 10px rgba(138, 138, 138, 0.993);
+  box-shadow: 0 0 16px 10px rgba(0, 0, 0, 0.644);
 }
 /* contenido formulario */
 .form-group {
@@ -62,7 +62,7 @@ body{
   height: 550px;
   border: 2px solid gray;
   border-radius: 15px;
-  box-shadow: 0 0 10px 10px rgba(138, 138, 138, 0.993);
+  box-shadow: 0 0 16px 10px rgba(0, 0, 0, 0.644);
 }
 /* -------------------------------------------------------------------------- */
 /* ICONO CORAZON FAVORITOS */
@@ -102,6 +102,16 @@ body{
   height: 640px;
   background-color: rgba(245, 245, 245, 0.829);
 }
+.cardProfile2 {
+  box-shadow: 0 0 16px 10px rgba(0, 0, 0, 0.644);
+  height: 950px;
+  background-color: rgba(245, 245, 245, 0.829);
+}
+.cardProfile3 {
+  box-shadow: 0 0 16px 10px rgba(0, 0, 0, 0.644);
+  height: 500px;
+  background-color: rgba(245, 245, 245, 0.829);
+}
 .page-footer{
   opacity:0.85;
   filter:alpha(opacity=0.93); 
@@ -129,7 +139,7 @@ body{
 }
 .textoNavMiPerfil{
   font-family: 'Estonia', cursive;
-  font-size:35px;
+  font-size:45px;
   color:white;
 }
 /* boton nav inicio y cierre sesion */
@@ -164,4 +174,7 @@ body{
   margin-top: 50px;
   margin-left: 15px;
   margin-right: 15px;
+}
+.pago {
+  box-shadow: 0 0 16px 10px rgba(0, 0, 0, 0.644);
 }

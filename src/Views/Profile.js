@@ -84,6 +84,7 @@ import CalendarClient from "../Components/Calendarclient";
 import { Link } from "react-router-dom";
 import { Context } from "../Store/appContext";
 import { useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -93,6 +94,16 @@ const Profile = (props) => {
   const { store } = useContext(Context);
   const [ setUser] = useState("");
   
+  function check(e) {
+    if(date ==="" || name ==="" || price ==="") {
+      Swal.fire({
+        icon: "error",
+        title: "Error de datos",
+        text: "Falta confirmar eventos para reserva",
+      });
+      e.preventDefault()
+    }
+   }
   const query = useQuery();
   let name = query.get("name");
   let price = query.get("price");
@@ -127,7 +138,7 @@ const Profile = (props) => {
         Aqui podrás seleccionar la fecha de tu Evento
       </h2>
       <div className="row mt-5 text-center ">
-        <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4 ">
+        <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4">
           <Card />
         </div>
 
@@ -155,7 +166,7 @@ const Profile = (props) => {
             <div>
             <Link
               to={"/Pago?name=" + name + "&price=" + price + "&date=" + date}
-              className="btn btn-success mt-4 mb-3"
+              className="btn btn-success mt-4 mb-3" onClick ={check}
             >
               Reservar
             </Link>

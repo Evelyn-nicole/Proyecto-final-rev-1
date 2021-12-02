@@ -97,6 +97,8 @@ export const EditFormUser = () => {
             });
             let path = `login`;
             history.push(path);
+            localStorage.setItem("isAuth", false);
+            window.location.reload();
           }
         })
         .catch((error) => console.error(error));

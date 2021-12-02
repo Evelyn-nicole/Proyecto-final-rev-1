@@ -205,10 +205,20 @@ export const Navbar = (props) => {
               </Link>
             </li>
             <li className="nav-link active">
+              {isAuth ? (
+                <Link className="nav-link text-white" to={`/Profile`}>
+                  <span className="textoNavMiPerfil">Mi Perfil</span>
+                </Link>) : (
+                <Link className="nav-link active text-white" to={`/NewUser`}>
+                  <span className="textoNav">Registrate</span>
+                </Link>)}
+            </li>
+
+            {/* <li className="nav-link active">
               <Link className="nav-link text-white" to={`/NewUser`}>
                 <span className="textoNav">Registrate</span>
               </Link>
-            </li>
+            </li> */}
 
             <li className="nav-link active text-white dropdown">
               <a
@@ -229,6 +239,8 @@ export const Navbar = (props) => {
               </ul>
             </li>
 
+
+
             <div className="nav-link text-white">
               {!isAuth ? (
                 <button
@@ -246,16 +258,6 @@ export const Navbar = (props) => {
                 </button>
               ) : (
                 <div>
-                  <div className="nav-link text-white">
-                  <li className="nav-link active">
-                    <Link
-                      className="nav-link text-white textoNavMiPerfil"
-                      to={`/Profile`}
-                    >
-                      <span>Mi Perfil</span>
-                    </Link>
-                  </li>
-                  </div>
                   <Link
                     to={`/login`}
                     className="btn btn-success mt-3"
@@ -266,7 +268,7 @@ export const Navbar = (props) => {
                     }}
                     type="submit"
                   >
-                    <span className="buttonNavCerrar">Cerrar Sesion</span>{" "}
+                    <span className="buttonNavCerrar text-white">Cerrar Sesion</span>{" "}
                   </Link>
                 </div>
               )}

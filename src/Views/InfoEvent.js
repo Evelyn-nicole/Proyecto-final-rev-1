@@ -88,9 +88,13 @@ const InfoEvent = (props) => {
       <h1 className="tituloLogin text-center">DETALLE DEL EVENTO</h1>
       <div className="card mb-3 mt-4">
         <div className="row">
-          <div className="col-md-5">
-            <img src=  "https://lavetis.es/wp-content/uploads/2019/07/editorial-en-mazagon-190305-by-rosa-garrido-263.jpg"
- className="img" alt="..." />
+          <div className="col-md-12">
+            <img
+              src={query.get("image")}
+              className="w-100"
+              alt="..."
+              style={{ height: "350px" }}
+            />
           </div>
           <div className="col-md-8">
             <div className="card-body">
@@ -105,7 +109,7 @@ const InfoEvent = (props) => {
               </p>
             </div>
           </div>
-          <div className="float-right mr-5">
+          <div className="float-right mr-5 mt-5">
             <Link className="text-white btn btn-primary mr-4" to="/">
               Volver
             </Link>

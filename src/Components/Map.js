@@ -19,19 +19,22 @@ const Map = () => {
 
   return (
     <div className="container-fluid">
+      <h2 className="text-center mt-4 textoHome">Ubicación del evento</h2>
       <div className="row">
-        <div className="col d-flex">
+        <div className="col d-flex mt-3">
           <div className="container">
             <div
               className="container"
-              style={{ height: "430px", width: "60px" }}
+              style={{ height: "430px", width: "2000px" }}
             >
               <GoogleMaps
-                apikey={"AIzaSyCT-iDpxeOvb9Nkeh-x7AKVj3xkUZ70SI4"}
-                style={{ height: "10px", width: "60px" }}
+                apikey={"AIzaSyCnYrzckMYInn71m_Ttp-w-YP6fuP3_998"}
+                // {"AIzaSyBcB-zuyKxM6O-1IIl_3dvvfAX2GvysJZ4"}
                 zoom={17}
                 center={{ lat: latab, lng: longB }}
+                
               />
+            
             </div>
           </div>
         </div>

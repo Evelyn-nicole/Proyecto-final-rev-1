@@ -144,7 +144,6 @@ import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../Store/appContext";
 import Swal from "sweetalert2";
-import $ from "jquery";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
@@ -179,37 +178,44 @@ export const CardAlternativeWedd = (props) => {
   let long = 0;
 
   if (props.data.name === "Matrimonio Hippie") {
-    lat = -33.387717713241614;
-    long = -70.54551201587743;
-  }
-  if (props.data.name === "Matrimonio Zombie") {
-    lat = -33.41532317293113;
-    long = -70.6077575689025;
-  }
+    lat = -33.43725870244793
+    long = -70.61246751648238
+}
+if (props.data.name === "Matrimonio Zombie") {
+    lat = -33.41532317293113
+    long = -70.6077575689025
+}
 
-  if (props.data.name === "Matrimonio Tradicional") {
-    lat = -33.433141886671564;
-    long = -70.63494759321209;
-  }
+if (props.data.name === "Matrimonio Tradicional") {
+    lat = -33.421863198116164
+    long = -70.62093444520954
+}
 
-  if (props.data.name === "Matrimonio Campirano") {
-    lat = -33.44059090237492;
-    long = -70.57306366696584;
-  }
+if (props.data.name === "Matrimonio Campirano") {
+    lat = -33.44059090237492
+    long = -70.57306366696584
+}
+
+if (props.data.name === "Cumpleaños Geek") {
+    lat = -33.4078390187337
+    long = -70.59175201122628
+}
+
+
   return (
     <div className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
       <div className=" m-2" style={props.styles}>
-        <div class="card cardProfile border-info ">
-          <img src={props.image} class="card-img-top p-3 rounded" alt="..." style={{height: "250px"}}/>
-          <div class="card-body d-flex flex-column">
+        <div className="card cardProfile border-info ">
+          <img src={props.image} className="card-img-top p-3 rounded" alt="..." style={{height: "250px"}}/>
+          <div className="card-body d-flex flex-column">
             <div className="">
               <h3 className="card-title text-center">{props.data.name}</h3>
             </div>
             <p className="text-center p-0 m-0">
-              Caminar hacia el altar pisando la fina arena y dar el “Sí, quiero”
-              con sabor a sal marina. Esa es una de las opciones que respira más
+              Caminar hacia el altar y dar el “Sí, quiero”
+              Esa es una de las opciones que respira más
               libertad. Huye de todo lo establecido y crea tus propias normas en
-              tu propia boda.
+              tu propia boda. Aqui podras econtrar esta entrenida tematica y hacer realidad la boda de tus sueños
             </p>
             <div className="p-1 text-left mt-3">
               <Link
@@ -221,7 +227,8 @@ export const CardAlternativeWedd = (props) => {
                   "&thematic=" +
                   props.data.thematic +
                   "&name=" + 
-                  props.data.name
+                  props.data.name +
+                  "&image=" + props.image
                 
                 }
                 className="">
